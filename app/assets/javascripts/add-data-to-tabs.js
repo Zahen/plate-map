@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery"], function(plateLayOutWidget, $) {
 
   plateLayOutWidget.addDataToFields = function() {
 
@@ -105,4 +103,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     }
   }
-})(jQuery, fabric)
+});

@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components"], function(plateLayOutWidget) {
 
   plateLayOutWidget.colorManager = function() {
 
@@ -74,12 +72,8 @@ var plateLayOutWidget = plateLayOutWidget || {};
           16: "#ee11ee",
           17: "#5c5c5c",
           18: "#a3a3a3"
-        },
-
-        getColor: function() {
-          console.log("Wow");
         }
     }
   }
 
-})(jQuery, fabric);
+});

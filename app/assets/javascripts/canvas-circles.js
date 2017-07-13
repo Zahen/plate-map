@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "fabric" ], function(plateLayOutWidget, fabric) {
 
   plateLayOutWidget.canvasCircles = function() {
     // this object contains circles
@@ -17,6 +15,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
           left: tileToAdd.left,
           stroke: 'gray',
           strokeWidth: 0.5*scale,
+          selectable: false, 
           evented: false
         });
 
@@ -31,7 +30,8 @@ var plateLayOutWidget = plateLayOutWidget || {};
           left: tileToAdd.left,
           stroke: 'gray',
           strokeWidth: 0.5*scale,
-          evented: false,
+          selectable: false, 
+          evented: false
         });
 
         var circleText = new fabric.IText(""+circle.colorIndex+"", {
@@ -44,7 +44,9 @@ var plateLayOutWidget = plateLayOutWidget || {};
             lockScalingY: true,
             originX:'center',
             originY: 'center',
-            visible: false
+            visible: false, 
+            selectable: false, 
+            evented: false
         });
 
         circle.parent = tileToAdd; // Linking the objects;
@@ -92,4 +94,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric)
+});

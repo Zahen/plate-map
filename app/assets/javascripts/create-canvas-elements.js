@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "fabric"], function(plateLayOutWidget, fabric) {
 
   plateLayOutWidget.createCanvasElements = function() {
     // this class manages creating all the elements within canvas
@@ -87,8 +85,10 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
             tile.setGradient("fill", {
               type: "radial",
-              y1: 2*scale,
-              y2: 2*scale,
+              x1: tile.width / 2,
+              x2: tile.width / 2,
+              y1: (tile.height/2 + 2) * scale,
+              y2: (tile.height/2 + 2) * scale,
               r1: tile.radius-(2*scale),
               r2: tile.radius,
               colorStops: {
@@ -117,29 +117,10 @@ var plateLayOutWidget = plateLayOutWidget || {};
           }
         }
 
-        this._addLargeRectangleOverlay();
         this._addWellDataToAll();
         this._addUnitDataToAll();
         this._fabricEvents();
-      },
-
-      _addLargeRectangleOverlay: function() {
-
-        this.overLay = new fabric.Rect({
-          width: 632,
-          height: 482,
-          left: 0,
-          top: 0,
-          opacity: 0.0,
-          originX:'left',
-          originY: 'top',
-          lockMovementY: true,
-          lockMovementX: true,
-          selectable: false
-        });
-
-        this.mainFabricCanvas.add(this.overLay);
       }
     };
   }
-})(jQuery, fabric);
+});

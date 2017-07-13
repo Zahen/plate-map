@@ -1,42 +1,50 @@
-(function(doc, script, code) {
-
-  var fileArray = [];
-  var fileArrayLength, arrayPointer = 0;
-
-  loadScript = function() {
-    script = doc.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.onload = function(){
-
-      if(arrayPointer < fileArray.length) {
-        // Recursive call
-        loadScript(arrayPointer);
-      } else {
-        // once all the files are loaded execute the code to crete widget.
-        code($, fabric);
-      }
-    };
-    script.src = fileArray[arrayPointer ++] + ".js";
-    doc.getElementsByTagName('script')[0].appendChild(script);
+require.config({
+  "baseUrl": require.toUrl(""), 
+  "paths": {
+    "jquery": "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min", 
+    "jquery-ui": "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min", 
+    "fabric": "https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.16/fabric.min", 
+    "select2": "https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min"
+  }, 
+  shim: {
+    'jquery-ui': {
+      deps: ['jquery']
+    }, 
+    "fabric": {
+      exports: "fabric"
+    }, 
+    "select2": {
+      deps: ['jquery']
+    }
   }
-  // So this array contains all the file names, whenever u add a new file just add it here
-  // Make sure you follow the syntax or return an object from the file
-  fileArray = ["libs/jquery-1.11.2.min", "libs/jquery-ui.min", "libs/fabric", "libs/select2",
-  "add-data-on-change", "add-data-to-tabs", "add-tab-data", "apply-well-data", "bottom-table", "canvas-circles",
-  "canvas", "check-box", "color-manager", "create-canvas-elements", "create-field", "engine", "well-area", "fabric-events", "interface", "load-plate", "menu",
-  "overlay", "preset", "redo", "tabs", "undo-redo-manager", "undo", "unit-data-field"];
+});
 
-  loadScript(arrayPointer);
+function loadCss(url) {
+    var link = document.createElement("link");
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    link.href = url;
+    document.getElementsByTagName("head")[0].appendChild(link);
+}
+loadCss(require.toUrl("../stylesheets/plate-layout.css"));
+loadCss("https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.css");
 
-}(document, "", function($, fabric){
+define("plate-layout-components", {}); 
+
+// So this array contains all the file names, whenever you add a new file just add it here
+// Make sure you follow the syntax or return an object from the file
+var fileArray = [ "plate-layout-components", "jquery", "jquery-ui", "fabric", "select2", 
+"add-data-on-change", "add-data-to-tabs", "add-tab-data", "apply-well-data", "bottom-table", "canvas-circles",
+"canvas", "check-box", "create-canvas-elements", "create-field", "engine", "well-area", "fabric-events", "interface", "load-plate", "menu",
+"overlay", "tabs", "undo-redo-manager", "preset", "color-manager", "unit-data-field"];
+
+define("plate-layout", fileArray, function(plateLayOutWidget, $) {
 
    $.widget("DNA.plateLayOut", {
 
-    plateLayOutWidget: {},
-
     options: {
-      value: 0
+      numRows: 8,
+      numCols: 12,
     },
 
     allTiles: [], // All tiles containes all thise circles in the canvas
@@ -52,8 +60,8 @@
         return code; 
       }; 
 
-      this.numRows = parseInt(this.options.numRows || 8); 
-      this.numCols = parseInt(this.options.numCols || 12); 
+      this.numRows = parseInt(this.options.numRows); 
+      this.numCols = parseInt(this.options.numCols); 
       this.scaleFactor = Math.min(8/this.numRows, 12/this.numCols); 
       this.rowIndex = []; 
       for (var i = 0; i < this.numRows; i++) {
@@ -77,7 +85,7 @@
         $.extend(this, new plateLayOutWidget[component](this));
       }
 
-      this.imgSrc = this.options.imgSrc || "assets";
+      this.imgSrc = this.options.imgSrc || requirejs.toUrl("../images");
 
       this._createInterface();
 
@@ -94,4 +102,4 @@
       alert("wow this is good");
     }
   });
-}));
+});

@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery", "color-manager"], function(plateLayOutWidget, $) {
 
   plateLayOutWidget.bottomTable = function() {
     // for bottom table
@@ -82,4 +80,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric);
+});

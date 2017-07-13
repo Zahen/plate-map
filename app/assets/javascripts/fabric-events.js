@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery", "fabric"], function(plateLayOutWidget, $, fabric) {
 
   plateLayOutWidget.fabricEvents = function() {
     // This object contains Menu items and how it works;
@@ -169,7 +167,6 @@ var plateLayOutWidget = plateLayOutWidget || {};
         // Update presets for selection
         this._addPreset();
         this._applyValuesToTabs();
-        //this.mainFabricCanvas.bringToFront(this.overLay);
       },
 
       _addPreset: function() {
@@ -229,4 +226,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric);
+});

@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery"], function(plateLayOutWidget, $) {
 
   plateLayOutWidget.checkBox = function() {
     // For those check boxes associated with every field in the tab
@@ -59,4 +57,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       },
     };
   }
-})(jQuery, fabric);
+});

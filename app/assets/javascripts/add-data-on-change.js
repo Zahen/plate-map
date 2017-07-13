@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "undo-redo-manager"], function(plateLayOutWidget) {
 
   plateLayOutWidget.addDataOnChange = function() {
     // This object is invoked when something in the tab fields change
@@ -66,4 +64,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric)
+});

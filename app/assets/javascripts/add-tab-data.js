@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery"], function(plateLayOutWidget, $) {
 
   plateLayOutWidget.addTabData = function() {
 
@@ -148,4 +146,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric);
+});

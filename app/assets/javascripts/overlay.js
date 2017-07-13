@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery", "fabric"], function(plateLayOutWidget, $, fabric) {
 
   plateLayOutWidget.overlay = function() {
     // overlay holds all the methods to put the part just above the canvas which contains all those
@@ -162,4 +160,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       }
     };
   }
-})(jQuery, fabric);
+});

@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery"], function(plateLayOutWidget, $) {
 
   plateLayOutWidget.engine = function(THIS) {
     // Methods which look after data changes and stack up accordingly
@@ -148,10 +146,10 @@ var plateLayOutWidget = plateLayOutWidget || {};
           var scale = THIS.scaleFactor; 
           var length = THIS.requiredFields.length;
           var fill = length;
-          tile.circleCenter.radius = 10*scale;
+          tile.circleCenter.set("radius", 10*scale);
           for(var i = 0; i < length; i++) {
             if(wellData[THIS.requiredFields[i]] == "" || wellData[THIS.requiredFields[i]] == "NULL") {
-              tile.circleCenter.radius = 14*scale;
+              tile.circleCenter.set("radius", 14*scale);
               fill --;
               continue;
             } 
@@ -178,4 +176,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       }
     }
   }
-})(jQuery, fabric);
+});

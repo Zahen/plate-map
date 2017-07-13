@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery"], function(plateLayOutWidget, $) {
 
   plateLayOutWidget.undoRedoManager = function(THIS) {
 
@@ -40,6 +38,13 @@ var plateLayOutWidget = plateLayOutWidget || {};
         this.undoRedoArray.push($.extend({}, data));
       },
 
+      undo: function(pointer) {
+
+        console.log("undo");
+        this.getPlates(this.undoRedoArray[pointer]);
+        this.undoRedoActive = false;
+      },
+
       callUndo: function() {
 
         this.undoRedoActive = true;
@@ -50,6 +55,13 @@ var plateLayOutWidget = plateLayOutWidget || {};
           this.actionPointer = (this.actionPointer) ? this.actionPointer - 1 : 0;
           this.undo(this.actionPointer);
         }
+      },
+
+      redo: function(pointer) {
+
+        this.getPlates(this.undoRedoArray[pointer]);
+        console.log("redo");
+        this.undoRedoActive = false;
       },
 
       callRedo: function() {
@@ -65,4 +77,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
     }
   };
 
-})(jQuery, fabric);
+});

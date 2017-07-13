@@ -73,7 +73,6 @@ Embed code similar to the below to add the plate layout tool to your application
 
 			numRows: 8,
 			numCols: 12,
-			imgSrc:  "css",
 			attributes: attributes,
 
 			updateWells: function(event, data) {

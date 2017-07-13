@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery", "fabric"], function(plateLayOutWidget, $, fabric) {
 
   plateLayOutWidget.canvas = function() {
     //
@@ -24,8 +22,8 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
         this.mainFabricCanvas = new fabric.Canvas('DNAcanvas', {
           backgroundColor: '#f5f5f5',
-          selection: true,
-          stateful: false,
+          selection: false,
+          stateful: true,
           hoverCursor: "pointer",
           renderOnAddRemove: false,
         })
@@ -35,4 +33,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric);
+});

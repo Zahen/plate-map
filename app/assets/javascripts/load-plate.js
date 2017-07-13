@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+define(["plate-layout-components", "jquery"], function(plateLayOutWidget, $) {
 
   plateLayOutWidget.loadPlate = function(THIS) {
     // Methods which look after data changes and stack up accordingly
@@ -59,4 +57,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     }
   }
-})(jQuery, fabric);
+});

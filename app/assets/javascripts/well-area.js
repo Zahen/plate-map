@@ -1,8 +1,6 @@
-var plateLayOutWidget = plateLayOutWidget || {};
+define(["plate-layout-components"], function(plateLayOutWidget) {
 
-(function($, fabric) {
-
-  plateLayOutWidget.wellArea = function(fabric) {
+  plateLayOutWidget.wellArea = function() {
 
     return {
 
@@ -249,4 +247,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     }
   }
-})(jQuery, fabric);
+});
