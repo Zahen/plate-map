@@ -7,12 +7,10 @@ var minify = require('gulp-clean-css');
 var path = {
     'source': {
         'css' : 'app/assets/stylesheets/plate-map/*.css',
-        'img' : 'app/assets/images/plate-map/*',
         'js'  : 'app/assets/javascripts/plate-map/*.js'
     },
     'destination': {
         'css' : 'dist/css',
-        'img' : 'dist/img',
         'js'  : 'dist/js'
     }
 };
@@ -27,12 +25,6 @@ gulp.task('css', function () {
         .pipe(gulp.dest(path.destination.css));
 });
 
-// Copy Images to dist folder
-gulp.task('img', function () {
-    return gulp.src(path.source.img)
-        .pipe(gulp.dest(path.destination.img));
-});
-
 // Uglify and Minify JS files
 gulp.task('js', function () {
     return gulp.src(path.source.js)
@@ -44,4 +36,4 @@ gulp.task('js', function () {
 });
 
 // Default Task -> Run gulp in workspace to execute all tasks
-gulp.task('default', ['css', 'img', 'js']);
+gulp.task('default', ['css', 'js']);

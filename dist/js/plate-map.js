@@ -467,7 +467,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
       fieldWarningMsg: function (field, text, include) {
         var that = this;
         var imgId = "fieldWarning" + field.id;
-        var img = $("<img>").attr("src", that._assets.warningImg).attr("id", imgId).addClass("plate-field-warning-image");
+        var img = $("<span>").html(that._assets.warningImg).attr("id", imgId).addClass("plate-field-warning-image");
         //field.root.find(".plate-setup-tab-name").append('<img id="theImg" src="theImg.png" />')
         if (include) {
           if (field.root.find("#" + imgId).length <= 0){
@@ -497,7 +497,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
       removeWarningMsg: function (field, text, include) {
         var that = this;
         var imgId = "fieldWarning" + field.id;
-        var img = $("<img>").attr("src", that._assets.warningImg).attr("id", imgId).addClass("plate-field-warning-image");
+        var img = $("<span>").html(that._assets.warningImg).attr("id", imgId).addClass("plate-field-warning-image");
         //field.root.find(".plate-setup-tab-name").append('<img id="theImg" src="theImg.png" />')
         if (include) {
           field.root.find(".plate-setup-tab-name").append(img);
@@ -891,7 +891,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
       globalSelectedAttributes: [],
 
       _addCheckBox: function(field) {
-        var checkImage = $("<img>").attr("src", this._assets.dontImg).addClass("plate-setup-tab-check-box")
+        var checkImage = $("<span>").html(this._assets.dontImg).addClass("plate-setup-tab-check-box bg-light")
           .data("clicked", false);
         checkImage.data("linkedFieldId", field.id);
         field.root.find(".plate-setup-tab-field-left-side").empty().append(checkImage);
@@ -926,10 +926,10 @@ var plateLayOutWidget = plateLayOutWidget || {};
           }
           checkImage.data("clicked", clicked);
           if (clicked) {
-            checkImage.attr("src", that._assets.doImg);
+            checkImage.html(that._assets.doImg);
             subFieldToInclude.push(subField.id);
           } else {
-            checkImage.attr("src", that._assets.dontImg);
+            checkImage.html(that._assets.dontImg);
           }
         });
         return subFieldToInclude;
@@ -954,9 +954,9 @@ var plateLayOutWidget = plateLayOutWidget || {};
             checkImage.data("clicked", clicked);
             if (clicked) {
               gsa.push(fieldId);
-              checkImage.attr("src", this._assets.doImg);
+              checkImage.html(this._assets.doImg);
             } else {
-              checkImage.attr("src", this._assets.dontImg);
+              checkImage.html(this._assets.dontImg);
             }
           }
         }
@@ -975,10 +975,10 @@ var plateLayOutWidget = plateLayOutWidget || {};
           var clicked = fieldIds.indexOf(fieldId) >= 0;
           checkImage.data("clicked", clicked);
           if (clicked) {
-            checkImage.attr("src", that._assets.doImg);
+            checkImage.html(that._assets.doImg);
             subFieldToInclude.push(subField.id);
           } else {
-            checkImage.attr("src", that._assets.dontImg);
+            checkImage.html(that._assets.dontImg);
           }
         });
         return subFieldToInclude;
@@ -1003,10 +1003,10 @@ var plateLayOutWidget = plateLayOutWidget || {};
             checkImage.data("clicked", clicked);
             if (clicked) {
               gsa.push(fieldId);
-              checkImage.attr("src", this._assets.doImg);
+              checkImage.html(this._assets.doImg);
             } else {
 
-              checkImage.attr("src", this._assets.dontImg);
+              checkImage.html(this._assets.dontImg);
             }
           }
         }
@@ -3273,12 +3273,12 @@ var plateLayOutWidget = plateLayOutWidget || {};
 plateLayOutWidget.assets = function () {
     return {
         _assets: {
-            doImg: 'app/assets/images/plate-map/do.png',
-            dontImg: 'app/assets/images/plate-map/dont.png',
-            warningImg: 'app/assets/images/plate-map/warning.png'
+            doImg: '&#10003;',
+            dontImg: '&nbsp;&nbsp;&nbsp;',
+            warningImg: '&#9888;'
         }
     };
-}
+};
 var plateLayOutWidget = plateLayOutWidget || {};
 
 (function($, fabric) {
