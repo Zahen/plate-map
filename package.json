@@ -8,7 +8,13 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build.package": "gulp build.package",
+    "build.prod": "gulp build.prod",
+    "serve.prod": "gulp serve.prod",
+    "build.dev": "gulp build.dev",
+    "serve.dev": "gulp serve.dev",
+    "start": "gulp serve.dev"
   },
   "repository": {
     "type": "git",
@@ -28,13 +34,23 @@
     "jquery": "3.3.1",
     "jquery-ui-dist": "1.12.1",
     "popper.js": "1.14.3",
-    "select2": "4.0.0"
+    "select2": "3.5.1"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.3",
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^3.10.0",
     "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.6.1",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-if": "^2.0.2",
+    "gulp-inject": "^4.3.2",
     "gulp-rename": "^1.4.0",
-    "gulp-uglify": "^3.0.1"
+    "gulp-replace": "^1.0.0",
+    "gulp-series": "^1.0.2",
+    "gulp-uglify": "^3.0.1",
+    "merge-stream": "^1.0.1",
+    "run-sequence": "^2.2.1"
   }
 }
