@@ -10,10 +10,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build.package": "gulp build.package",
-    "build.prod": "gulp build.prod",
-    "serve.prod": "gulp serve.prod",
     "build.dev": "gulp build.dev",
     "serve.dev": "gulp serve.dev",
+    "build.prod": "gulp build.prod",
+    "serve.prod": "gulp serve.prod",
     "start": "gulp serve.dev"
   },
   "repository": {
@@ -30,7 +30,7 @@
   "dependencies": {
     "bootstrap": "4.1.3",
     "clipboard": "1.7.1",
-    "fabric": "1.7.0",
+    "fabric": "1.6.0",
     "jquery": "3.3.1",
     "jquery-ui-dist": "1.12.1",
     "popper.js": "1.14.3",
@@ -44,11 +44,8 @@
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.6.1",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-if": "^2.0.2",
     "gulp-inject": "^4.3.2",
     "gulp-rename": "^1.4.0",
-    "gulp-replace": "^1.0.0",
-    "gulp-series": "^1.0.2",
     "gulp-uglify": "^3.0.1",
     "merge-stream": "^1.0.1",
     "run-sequence": "^2.2.1"

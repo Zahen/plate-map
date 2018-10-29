@@ -55,19 +55,7 @@ const path = {
     }
 };
 
-let config = {
-    source: {
-        css: '',
-        js: '',
-        img: '',
-        html: ''
-    },
-    destination: {
-        css: '',
-        js: '',
-        root: ''
-    }
-};
+let config = {source: {css: '', js: '', img: '', html: ''}, destination: {css: '', js: '', root: ''}};
 
 gulp.task('config:prod', () => {
     config.source.css = path.source.dependencies.css.concat(path.source.app.css);
@@ -140,7 +128,7 @@ gulp.task('copy_img', () => {
 });
 
 // Inject sources to index.html and minify it
-gulp.task('inject', () => {
+gulp.task('inject:prod', () => {
     return gulp.src(config.source.html)
         .pipe(inject(gulp.src([`${config.destination.css}/*.css`, `${config.destination.js}/*.js`], {read: false}),
             {
@@ -151,10 +139,33 @@ gulp.task('inject', () => {
         .pipe(gulp.dest(config.destination.root));
 });
 
-// Serve application in development mode
+gulp.task('inject:dev', () => {
+    return gulp.src(config.source.html)
+        .pipe(inject(
+            gulp.src(config.source.css, {read: false}),
+            {
+                transform: (filePath) => {
+                    const fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.length);
+                    return '<link rel="stylesheet" href="css/' + fileName + '">';
+                }
+            }))
+        .pipe(inject(
+            gulp.src(config.source.js, {read: false}),
+            {
+                transform: (filePath) => {
+                    const fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.length);
+                    return '<script src="js/' + fileName + '"></script>';
+                }
+            }
+        ))
+        .pipe(minifyHTML({collapseWhitespace: true}))
+        .pipe(gulp.dest(config.destination.root));
+});
+
+// Serve application in development mode [BrowserSync]
 gulp.task('server.dev', () => {
-    browserSync.init({server: 'dist/dev', proxy: 'localhost:9999'});
-    gulp.watch([path.source.app.css, path.source.app.css], ['build.dev'])
+    browserSync.init({server: 'dist/dev'});
+    gulp.watch([path.source.app.css, path.source.app.js], ['build.dev'])
         .on('change', browserSync.reload);
 });
 
@@ -168,12 +179,12 @@ gulp.task('server.prod', () => {
 
 gulp.task('build.package', () => runSequence('clean', 'config:pack', 'css', 'js'));
 
-gulp.task('build.dev', () => runSequence('clean', 'config:dev', 'copy_src', 'copy_img', 'inject'));
+gulp.task('build.dev', () => runSequence('clean', 'config:dev', 'copy_src', 'copy_img', 'inject:dev'));
 
-gulp.task('serve.dev', () => runSequence('clean', 'config:dev', 'copy_src', 'copy_img', 'inject', 'server.dev'));
+gulp.task('serve.dev', () => runSequence('clean', 'config:dev', 'copy_src', 'copy_img', 'inject:dev', 'server.dev'));
 
-gulp.task('build.prod', () => runSequence('clean', 'config:prod', 'css', 'js', 'copy_img', 'inject'));
+gulp.task('build.prod', () => runSequence('clean', 'config:prod', 'css', 'js', 'copy_img', 'inject:prod'));
 
-gulp.task('serve.prod', () => runSequence('clean', 'config:prod', 'css', 'js', 'copy_img', 'inject', 'server.prod'));
+gulp.task('serve.prod', () => runSequence('clean', 'config:prod', 'css', 'js', 'copy_img', 'inject:prod', 'server.prod'));
 
-gulp.task('default', ['serve.prod']);
+gulp.task('default', ['serve.dev']);
