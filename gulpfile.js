@@ -50,39 +50,13 @@ const path = {
         },
         pack: {
             css: 'dist/package/css',
-            js: 'dist/package/js'
+            js: 'dist/package/js',
+            root: 'dist/package'
         }
     }
 };
 
 let config = {source: {css: '', js: '', img: '', html: ''}, destination: {css: '', js: '', root: ''}};
-
-gulp.task('config:prod', () => {
-    config.source.css = path.source.dependencies.css.concat(path.source.app.css);
-    config.source.js = path.source.dependencies.js.concat(path.source.app.js);
-    config.source.img = path.source.dependencies.img;
-    config.source.html = path.source.app.html;
-    config.destination.css = path.destination.prod.css;
-    config.destination.js = path.destination.prod.js;
-    config.destination.root = path.destination.prod.root;
-});
-
-gulp.task('config:dev', () => {
-    config.source.css = path.source.dependencies.css.concat(path.source.app.css);
-    config.source.js = path.source.dependencies.js.concat(path.source.app.js);
-    config.source.img = path.source.dependencies.img;
-    config.source.html = path.source.app.html;
-    config.destination.css = path.destination.dev.css;
-    config.destination.js = path.destination.dev.js;
-    config.destination.root = path.destination.dev.root;
-});
-
-gulp.task('config:pack', () => {
-    config.source.css = path.source.app.css;
-    config.source.js = path.source.app.js;
-    config.destination.css = path.destination.pack.css;
-    config.destination.js = path.destination.pack.js;
-});
 
 function concat_minify_css(source, destination) {
     return gulp.src(source)
@@ -100,8 +74,36 @@ function concat_uglify_js(source, destination) {
         .pipe(gulp.dest(destination));
 }
 
+gulp.task('config.prod', () => {
+    config.source.css = path.source.dependencies.css.concat(path.source.app.css);
+    config.source.js = path.source.dependencies.js.concat(path.source.app.js);
+    config.source.img = path.source.dependencies.img;
+    config.source.html = path.source.app.html;
+    config.destination.css = path.destination.prod.css;
+    config.destination.js = path.destination.prod.js;
+    config.destination.root = path.destination.prod.root;
+});
+
+gulp.task('config.dev', () => {
+    config.source.css = path.source.dependencies.css.concat(path.source.app.css);
+    config.source.js = path.source.dependencies.js.concat(path.source.app.js);
+    config.source.img = path.source.dependencies.img;
+    config.source.html = path.source.app.html;
+    config.destination.css = path.destination.dev.css;
+    config.destination.js = path.destination.dev.js;
+    config.destination.root = path.destination.dev.root;
+});
+
+gulp.task('config.pack', () => {
+    config.source.css = path.source.app.css;
+    config.source.js = path.source.app.js;
+    config.destination.css = path.destination.pack.css;
+    config.destination.js = path.destination.pack.js;
+    config.destination.root = path.destination.pack.root;
+});
+
 gulp.task('clean', () => {
-    return gulp.src('dist')
+    return gulp.src(config.destination.root)
         .pipe(clean());
 });
 
@@ -127,8 +129,7 @@ gulp.task('copy_img', () => {
         .pipe(gulp.dest(config.destination.css));
 });
 
-// Inject sources to index.html and minify it
-gulp.task('inject:prod', () => {
+gulp.task('inject.prod', () => {
     return gulp.src(config.source.html)
         .pipe(inject(gulp.src([`${config.destination.css}/*.css`, `${config.destination.js}/*.js`], {read: false}),
             {
@@ -139,7 +140,7 @@ gulp.task('inject:prod', () => {
         .pipe(gulp.dest(config.destination.root));
 });
 
-gulp.task('inject:dev', () => {
+gulp.task('inject.dev', () => {
     return gulp.src(config.source.html)
         .pipe(inject(
             gulp.src(config.source.css, {read: false}),
@@ -162,14 +163,12 @@ gulp.task('inject:dev', () => {
         .pipe(gulp.dest(config.destination.root));
 });
 
-// Serve application in development mode [BrowserSync]
 gulp.task('server.dev', () => {
     browserSync.init({server: 'dist/dev'});
     gulp.watch([path.source.app.css, path.source.app.js], ['build.dev'])
         .on('change', browserSync.reload);
 });
 
-// Serve application in production mode
 gulp.task('server.prod', () => {
     connect.server({
         name: 'App [PRODUCTION MODE]',
@@ -177,14 +176,14 @@ gulp.task('server.prod', () => {
     });
 });
 
-gulp.task('build.package', () => runSequence('clean', 'config:pack', 'css', 'js'));
+gulp.task('build.package', (done) => runSequence('config.pack', 'clean', 'css', 'js', done));
 
-gulp.task('build.dev', () => runSequence('clean', 'config:dev', 'copy_src', 'copy_img', 'inject:dev'));
+gulp.task('build.dev', (done) => runSequence('config.dev', 'clean', 'copy_src', 'copy_img', 'inject.dev', done));
 
-gulp.task('serve.dev', () => runSequence('clean', 'config:dev', 'copy_src', 'copy_img', 'inject:dev', 'server.dev'));
+gulp.task('serve.dev', (done) => runSequence('build.dev', 'server.dev', done));
 
-gulp.task('build.prod', () => runSequence('clean', 'config:prod', 'css', 'js', 'copy_img', 'inject:prod'));
+gulp.task('build.prod', (done) => runSequence('config.prod', 'clean', 'css', 'js', 'copy_img', 'inject.prod', done));
 
-gulp.task('serve.prod', () => runSequence('clean', 'config:prod', 'css', 'js', 'copy_img', 'inject:prod', 'server.prod'));
+gulp.task('serve.prod', (done) => runSequence('build.prod', 'server.prod', done));
 
 gulp.task('default', ['serve.dev']);
