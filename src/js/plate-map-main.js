@@ -57,72 +57,6 @@ window.onload = function () {
         }
     };
 
-    var amplicons_field = {
-        amplicons: {
-            required: true,
-            id: 'amplicons',
-            name: "Amplicons",
-            type: "multiplex",
-            placeHolder: "Amplicons",
-            options: [
-                {
-                    id: 'A',
-                    text: 'Amplicon_A'
-                },
-                {
-                    id: 'B',
-                    text: 'Amplicon_B'
-                },
-                {
-                    id: 'C',
-                    text: 'Amplicon_C'
-                },
-                {
-                    id: 'D',
-                    text: 'Amplicon_D'
-                }
-            ],
-            multiplexFields: {
-                template_ngul: {
-                    required: true,
-                    id: 'template_ngul',
-                    name: 'template conc',
-                    type: 'select',
-                    options: [
-                        {id: 'a', text: "a"},
-                        {id: 'b', text: "b"},
-                        {id: 'c', text: "c"}
-                    ]
-                },
-                primer_umolarity: {
-                    required: true,
-                    id: 'primer_umolarity',
-                    name: 'Primer conc',
-                    type: 'numeric',
-                    placeHolder: "Primer",
-                    units: ['uM (final)', "unit1"],
-                    defaultUnit: 'uM (final)'
-                },
-                probe_umolarity: {
-                    required: true,
-                    id: 'probe_umolarity',
-                    name: 'Probe conc',
-                    type: 'numeric',
-                    placeHolder: "Probe",
-                    defaultUnit: 'uM (final)'
-                },
-                dilution_factor: {
-                    required: true,
-                    id: 'dilution_factor',
-                    name: 'Dilution factor',
-                    type: 'numeric',
-                    placeHolder: "Dilution factor",
-                    defaultUnit: 'X'
-                }
-            },
-        },
-    };
-
     var attributes = {
         presets: [
             {
@@ -138,10 +72,6 @@ window.onload = function () {
             {
                 name: "Settings",
                 fields: fields
-            },
-            {
-                name: "amplicons",
-                fields: amplicons_field
             }
         ]
     }; //attributes
