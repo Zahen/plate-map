@@ -15,6 +15,7 @@ utilized in the context of a larger scientific software application.
 # Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
+- [Project Structure](#project-structure)
 - [How to start](#how-to-start)
 - [Usage](#usage)
 - [User-Provided Callback Functions](#user-provided-callback-functions)
@@ -37,7 +38,6 @@ utilized in the context of a larger scientific software application.
 
 # Project Structure
 This project has the following structure : 
-
 ```
 plate-map
     ├── src
@@ -52,6 +52,7 @@ plate-map
 
 # How to start
 ## Before Starting
+### Installation
 This project requires `Node.js` and `NPM` to be installed on your machine. Download a pre-built installer for your 
 platform from  [nodejs.org](https://nodejs.org/en/download/) and install it before starting. **Note** that this 
 project was tested with Node v9.10.1 and NPM v5.6.0.
@@ -71,7 +72,8 @@ used by the NPM package Canvas which the project depends-on.
     brew install giflib
     brew install libjpeg
     ```
-## Automatic Workflow
+   
+### Automatic Workflow
 The project uses [Gulp](https://gulpjs.com/) to automate and enhance the workflow. Like that, the application can run
 custom defined repetitious tasks and manages process automation.
 
