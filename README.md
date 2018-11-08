@@ -51,8 +51,7 @@ plate-map
 ```
 
 # How to start
-## Before Starting
-### Installation
+## Installation
 This project requires `Node.js` and `NPM` to be installed on your machine. Download a pre-built installer for your 
 platform from  [nodejs.org](https://nodejs.org/en/download/) and install it before starting. **Note** that this 
 project was tested with Node v9.10.1 and NPM v5.6.0.
@@ -73,7 +72,7 @@ used by the NPM package Canvas which the project depends-on.
     brew install libjpeg
     ```
    
-### Automatic Workflow
+## Automatic Workflow
 The project uses [Gulp](https://gulpjs.com/) to automate and enhance the workflow. Like that, the application can run
 custom defined repetitious tasks and manages process automation.
 
