@@ -1,31 +1,136 @@
-# JavaScript Plate Layout
-JavaScript Plate Layout is an open source tool developed collaboratively by [Chai Biotechnologies](www.chaibio.com) and [New England Biolabs](www.neb.com) for visualizing and editing the layout of scientific assay plates.
+# Introduction
+**JavaScript Plate Layout** is an open source tool developed collaboratively by [Chai Biotechnologies](www.chaibio.com) 
+and [New England Biolabs](www.neb.com) for visualizing and editing the layout of scientific assay plates.
 
-Many scientific instruments such as PCR thermocyclers, DNA sequencers, and microplate readers use plates ranging from 8 to 1536 wells, with 96 well plates being particularly common. It is usually necessary to set data attributes for each of the wells, both so that the instrument can properly configure itself, and so that results can be properly analyzed. Correctness of the layout is critical for the integrity of results, but not always easy to obtain given the number of wells and data attributes to be assigned.
+Many scientific instruments such as PCR thermocyclers, DNA sequencers, and microplate readers use plates ranging from 8 
+to 1536 wells, with 96 well plates being particularly common. It is usually necessary to set data attributes for each of
+the wells, both so that the instrument can properly configure itself, and so that results can be properly analyzed. 
+Correctness of the layout is critical for the integrity of results, but not always easy to obtain given the number of 
+wells and data attributes to be assigned.
 
-JavaScript Plate Layout provides a tool for visualizing the plate layout using a few dimensions at a time, to better comprehend the layout they have created. It provides extensive plate editing capabilities and is designed to be easily utilized in the context of a larger scientific software application.
+JavaScript Plate Layout provides a tool for visualizing the plate layout using a few dimensions at a time, to better 
+comprehend the layout they have created. It provides extensive plate editing capabilities and is designed to be easily 
+utilized in the context of a larger scientific software application.
 
-## Features
-* Assign and edit up to roughly 25 data attributes to plates ranging from 8 to 96 wells
-* Incrementially save plate layouts to server via JavaScript callback interface
-* Colorfully visualize the layout using user-selected data dimensions
-* Assign attributes to multiple wells at once
-* Supports multiple units of measure for numeric attributes
-* Undo / redo support
-* Import plate templates
-* Plate and well completion status indication
-* Read only plate map
-* Edit only mode to disable add new wells and delete existing wells.
+# Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [How to start](#how-to-start)
+- [Usage](#usage)
+- [User-Provided Callback Functions](#user-provided-callback-functions)
+- [Major Functions](#major-functions)
+- [Data Types](#data-types)
+- [Exemple 1](#example-1-multiplex-field-without-sub-field-multiplex-units)
+- [Exemple 2](#example-2-multiplex-field-with-multiplex-unit-sub-fields)
 
-## Usage
-Embed code similar to the below to add the plate layout tool to your application. See Configuration Options for all available settings.
+# Features
+- Assign and edit up to roughly 25 data attributes to plates ranging from 8 to 96 wells
+- Incrementially save plate layouts to server via JavaScript callback interface
+- Colorfully visualize the layout using user-selected data dimensions
+- Assign attributes to multiple wells at once
+- Supports multiple units of measure for numeric attributes
+- Undo / redo support
+- Import plate templates
+- Plate and well completion status indication
+- Read only plate map
+- Edit only mode to disable add new wells and delete existing wells.
 
-```html
-<head>
-  <script type="text/javascript" src="javascripts/plate-layout.js"></script>
-  <script type="text/javascript">
+# Project Structure
+This project has the following structure : 
+
+```
+plate-map
+    ├── src
+    |   ├── css
+    |   │   └── *.css
+    |   └── js
+    |       └── *.js
+    ├── index.html
+    ├── gulpfile.js
+    └── package.json
+```
+
+# How to start
+## Before Starting
+This project requires `Node.js` and `NPM` to be installed on your machine. Download a pre-built installer for your 
+platform from  [nodejs.org](https://nodejs.org/en/download/) and install it before starting. **Note** that this 
+project was tested with Node v9.10.1 and NPM v5.6.0.
+
+If you're new to NPM, you can get to know it better from [what-is-npm?](https://docs.npmjs.com/getting-started/what-is-npm).
+
+The project requires also `gif_lib` and `jpeg_lib` to be installed on your machine. **Note** that these libraries are 
+used by the NPM package Canvas which the project depends-on. 
+
+- For Linux/Ubuntu :
+    ```bash
+    sudo apt install libgif-dev
+    sudo apt install libjpeg-dev
+    ```
+- For Mac OS :
+    ```bash
+    brew install giflib
+    brew install libjpeg
+    ```
+## Automatic Workflow
+The project uses [Gulp](https://gulpjs.com/) to automate and enhance the workflow. Like that, the application can run
+custom defined repetitious tasks and manages process automation.
+
+All Gulp configuration goes in `gulpfile.js` in the root of the project. This file contains all the tasks we created to 
+build and serve the application in both development and production environments. 
+
+A pattern for writing tasks is that you first load a package you're about to use and then define a task which is based 
+on that package. **Note** that you should install the package you're about to use it before load it.
+
+Please, have a look at `gulpfile.js` for more details about the available tasks of this projects.
+
+## Dev Environment
+This development environment creates a directory called `dist/dev` to stuff all JS, CSS and HTML files. The environment 
+is served by `BrowserSync` (an NPM package) that allows live reloads (change your code and the page will be auto-reloaded) 
+and interaction synchronization (all your actions are mirrored across every browser). So developers can modify the source
+code under the directory `src`, and the application will be updated automatically across every browser. For more details 
+about BrowserSync, see [BrowserSync](https://browsersync.io/). 
+
+To run the application in development mode : 
+```bash
+# install all needed dependencies under the directory `node_modules` in the root of the project, if this is your first time here
+npm install
+# compile the development application in `dist/dev` and serve it
+npm start # or npm run serve.dev
+```
+Please have a look at `package.json` for more tasks.
+
+## Prod Environment
+This production environment concatenates both CSS files in one minified file and JS files in one uglified file. For more details 
+about 'Minification', see [Minification in programming](https://en.wikipedia.org/wiki/Minification_(programming)).
+The environment creates also a directory called `dist/prod` to stuff the JS, CSS and HTML minified files. **Note** that 
+this environment uses a simple server instead of BrowserSync.
+
+To run the application in production mode : 
+```bash
+# compile the production application in `dist/prod` and serve it
+npm run serve.prod
+```
+Again, please see `package.json` for more flavors of tasks.
+
+## Package Build
+We also created an NPM package which can be used by others projects. This package contains :
+- main.min.css (minified CSS file that concatenates all CSS source files)
+- main.min.js (uglified JS file that concatenates all JS source files)
+- package.json (JSON file that mainly defines all the required dependencies and tasks af the package)
+
+`Todo`, this package is available on [NPM](http://npmjs.com). 
+
+To build this package on your machine : 
+```bash
+# compile the package in `dist/pack`
+npm run build.package
+```
+
+# Usage
+The source file `src/js/plate-map-main.js` (showed below) initializes the plate layout tool. See Configurations Options
+for all available settings.
+```js
   window.onload = function() {
-
     //Define fields to hold data
     var fields = {
       Volume: {
@@ -58,7 +163,7 @@ Embed code similar to the below to add the plate layout tool to your application
 
     // Define presentation attributes
     var attributes = {
-      presets: { // Define quick pick of different combinations of checked fields
+      presets: {// Define quick pick of different combinations of checked fields
         "preset 1": ['volume', 'pol'],
         "preset 2": ["pol"]
       },
@@ -68,16 +173,15 @@ Embed code similar to the below to add the plate layout tool to your application
           fields: fields 
         }
       ], 
-    } //attributes
+    };
 
+    // Main function
     $("#my-plate-layout").plateLayOut({
-
       numRows: 8,
       numCols: 12,
       imgSrc:  "css",
       readOnly: false,  // optional
       attributes: attributes,
-
       updateWells: function(event, data) {
         //Run when data state changes
       },
@@ -86,40 +190,28 @@ Embed code similar to the below to add the plate layout tool to your application
         console.log('selected: ' + selectedWell.selectedAddress);
       }
     });
-
     //You can trigger the load of plateData at any time, 
     //including initializing, using the getPlates method
     $("#my-plate-layout").plateLayOut("getPlates", plateData);
   }
-  </script>
-</head>
-
-<body>
-    <div id="my-plate-layout"></div>
-</body>
 ```
 
-## Attribute Specification
-More detailed explanation of the example attribute definition provided above to come.
-
-## JavaScript API
-### User-Provided Callback Functions
+# User-Provided Callback Functions
 The following callback function must be implemented by the user and provided to the init function.
 
-#### updateWells(event, data)
+## updateWells(event, data)
 Anytime the user makes changes, this callback will be invoked with the current state of the data, 
 allowing the developer to respond to changes.
 
-#### selectedWells: function(event, selectedWell)
+## selectedWells: function(event, selectedWell)
 Every time after mouse up event on canvas, selectedWells function will be triggered and output the addresses of selectedWell
 
-### Major functions
+# Major Functions
 The following functions may be called at any time to interact with the UI.  
 Typically you will invoke these functions using `$("#mylayout").plateLayOut("function", ...args)` form. 
 
-#### getPlates(data)
+## getPlates(data)
 This function may be called at any time to load data. Well data should be passed in the following form:
-
 ```js
 {
   derivative: {
@@ -182,45 +274,44 @@ This function may be called at any time to load data. Well data should be passed
   }
 }
 ```
-#### isReadOnly()
+
+## isReadOnly()
 This function will disable editing of the plates, set `flag` to true for read only mode and set `flag` to false to disable read only mode
 ```js
 $("#mylayout").plateLayOut("isReadOnly", flag)
 ```
 
-#### isDisableAddDeleteWell()
+## isDisableAddDeleteWell()
 This function will disable adding and removing the existing wells. Set `flag` to true will set the current state of the plate as reference and remove the ability to add and remove wells. `defaultFields` can be specified for setting default values to existing empty wells (`defaultFields` format: `{fieldId1: val1, fieldId2: val2, ...}`)
 ```js
 $("#mylayout").plateLayOut("isDisableAddDeleteWell", flag, defaultFields)
 ```
 
-#### getSelectedObject()
+## getSelectedObject()
 Calling this function will return the derivative of the current selected wells on the plate
 ```js
 $("#my-plate-layout").plateLayOut("getSelectedObject")
 ```
 
-#### setSelectedWell()
-Calling this function will set the input address as selected wells on the plate, `address_list` is a list of addresses (example: ['A1', 'A2', ...])
+## setSelectedWell()
+Calling this function will set the input address as selected wells on the plate, `address_list` is a list of addresses
+ (example: ['A1', 'A2', ...])
 ```js
 $("#my-plate-layout").plateLayOut("setSelectedWell", address_list)
 ```
 
+# Data Types
+We have four data types which can be used to initialize tabs in the right hand side. They are text, numeric, boolean and 
+multichoice.
 
-### Data Types.
-
-We have four data types which can be used to initialize tabs in the right hand side. They are text, numeric, boolean and multichoice.
-
-#### Text
-
+## Text
 Text field are the normal and basic text field which holds a text value inside. Nothing specific.
 
-#### Numeric
-
-Numeric fields only allow numeric values. If a non-numeric value is entered, the field will be rendered in red and not save the value. 
-
-Numeric fields may optionally allow for units. You can specify the default unit if desired, otherwise the first unit will be used. 
-
+## Numeric
+Numeric fields only allow numeric values. If a non-numeric value is entered, the field will be rendered in red and not 
+save the value. 
+Numeric fields may optionally allow for units. You can specify the default unit if desired, otherwise the first unit 
+will be used. 
 ```js
 Volume: {
   required: true,
@@ -232,11 +323,10 @@ Volume: {
   defaultUnit: "uL"
 }
 ```
-
-see the units in the above object. Units will be a seperate dropdown and will be placed over the text box where we enter speed data.
-
-when numeric field is used as a sub field for multiplex field, if the numeric field has multiplex units, the set up of the field will become:
-
+see the units in the above object. Units will be a seperate dropdown and will be placed over the text box where we enter 
+speed data.
+when numeric field is used as a sub field for multiplex field, if the numeric field has multiplex units, the set up of 
+the field will become:
 ```js
 condition_amt: {
   required: false,
@@ -247,18 +337,14 @@ condition_amt: {
   units: ["unit1", "unit2", "unit3", "unit4", "unit5", "unit6"]
 }
 ```
-
 Note that `units` attribute is a list of all the possible options for `condition_amt` field.
 More examples at the end of the page
 
-#### Boolean Field
-
+## Boolean Field
 Name says it all, Just brought the select2 to show it.
 
-#### Select
-
+## Select
 Selected single option using select2 dropdown.Options field lists options in order. 
-
 ```js
 Polymerase: {
   required: true,
@@ -279,10 +365,8 @@ Polymerase: {
 }
 ```
 
-#### Multiselect
-
+## Multiselect
 Select multiple options using select2 picker. Options field lists options in order. 
-
 ```js
 Polymerase: {
   required: true,
@@ -303,13 +387,13 @@ Polymerase: {
 }
 ```
 
-#### Multiplex
-
+## Multiplex
 A special field type used to handle fields which contain multiple sub fields
+creating a multiplex field will automatically generate a single select field with display name `Select to edit`, the 
+single select field is for user to choose one multiplex value to inspect or update. multiplexFields can be used to 
+specify sub fields, components of multiplexFields can be any of the basic field type shown above.
 
-creating a multiplex field will automatically generate a single select field with display name `Select to edit`, the single select field is for user to choose one multiplex value to inspect or update. multiplexFields can be used to specify sub fields, components of multiplexFields can be any of the basic field type shown above.
-
-##### Example 1: multiplex field without sub field multiplex units
+### Example 1: multiplex field without sub field multiplex units
 ```js
 Amplicon: {
   required: true,
@@ -362,11 +446,10 @@ Amplicon: {
   }
 }
 ```
+see the example above, Amplicon is a multiplex field contains sub fields: template concentration, primer concentration, 
+probe concentration and dilution factor.
 
-see the example above, Amplicon is a multiplex field contains sub fields: template concentration, primer concentration, probe concentration and dilution factor.
-
-##### Example 2: multiplex field with multiplex unit sub fields
-
+### Example 2: multiplex field with multiplex unit sub fields
 ```js
 experimental_conditions: {
   required: false,
@@ -413,5 +496,9 @@ experimental_conditions: {
   }
 }
 ```
-
-In this case `experimental_conditions` is a multiplex field with subfields `condition_amt` and `is_modulator`. `condition_amt` is a subfield with multiplex units. In `experimental_conditions` field options, for each experimental condition there is a corresponding `unitOptions`. `unitOptions` is used to filter units upon choosing an experimental condition. For instance, if the user chooses option "a" in the single select field, the corresponding list of unit options for subfield id `raw_value` will be `["unit1", "unit2"]` , which is used to filter the unit options in the `condition_amt` field. `condition_amt` will only have unit options `["unit1", "unit2"]` after the filtering.
+In this case `experimental_conditions` is a multiplex field with subfields `condition_amt` and `is_modulator`. 
+`condition_amt` is a subfield with multiplex units. In `experimental_conditions` field options, for each experimental 
+condition there is a corresponding `unitOptions`. `unitOptions` is used to filter units upon choosing an experimental 
+condition. For instance, if the user chooses option "a" in the single select field, the corresponding list of unit 
+options for subfield id `raw_value` will be `["unit1", "unit2"]` , which is used to filter the unit options in the 
+`condition_amt` field. `condition_amt` will only have unit options `["unit1", "unit2"]` after the filtering.
