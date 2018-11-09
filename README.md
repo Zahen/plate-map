@@ -1,6 +1,6 @@
 # Introduction
-[//]: <> (think to update badges [version, licence] when needed because they are static)
-[//]: <> (todo : think to change these badges to refer to the official plate-map github repo)
+<!-- think to update badges [version, licence] when needed because they are static -->
+<!-- todo : think to change these badges to refer to the official plate-map github repo -->
 ![version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg?style=flat-square&v=1.0)
 [![licence ISC](https://img.shields.io/badge/licence-ISC-green.svg?style=flat-square&v=1.0)](https://www.isc.org/downloads/software-support-policy/isc-license/)
 [![GitHub issues](https://img.shields.io/github/issues/Zahen/plate-map.svg?style=flat-square&v=1.0)](https://github.com/Zahen/plate-map/issues)
@@ -161,7 +161,7 @@ We also created an _NPM_ package which can be used by others projects. This pack
 - main.min.js (uglified JS file that concatenates all JS source files)
 - package.json (JSON file that mainly defines all the required dependencies and tasks af the package)
 
-[//]: <> (todo : this package is available on [NPM_Link])
+<!-- this package is available on [NPM_Link] -->
 
 To build this package on your machine : 
 ```bash
