@@ -170,7 +170,7 @@ npm run build.package
 ```
 
 # Usage
-The source file `src/js/main.js` (showed below) initializes the plate layout tool. See Configurations Options
+The source file `src/js/example.js` (showed below) initializes the plate layout tool. See Configurations Options
 for all available settings.
 ```js
   window.onload = function() {
