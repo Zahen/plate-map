@@ -74,29 +74,28 @@ function concat_uglify_js(source, destination) {
         .pipe(gulp.dest(destination));
 }
 
-gulp.task('config.prod', () => {
+function config_env(env) {
     config.source.css = path.source.dependencies.css.concat(path.source.app.css);
     config.source.js = path.source.dependencies.js.concat(path.source.app.js);
     config.source.img = path.source.dependencies.img;
     config.source.html = path.source.app.html;
-    config.destination.css = path.destination.prod.css;
-    config.destination.js = path.destination.prod.js;
-    config.destination.root = path.destination.prod.root;
+    config.destination.css = path.destination[env].css;
+    config.destination.js = path.destination[env].js;
+    config.destination.root = path.destination[env].root;
+}
+
+gulp.task('config.prod', () => {
+    config_env('prod');
 });
 
 gulp.task('config.dev', () => {
-    config.source.css = path.source.dependencies.css.concat(path.source.app.css);
-    config.source.js = path.source.dependencies.js.concat(path.source.app.js);
-    config.source.img = path.source.dependencies.img;
-    config.source.html = path.source.app.html;
-    config.destination.css = path.destination.dev.css;
-    config.destination.js = path.destination.dev.js;
-    config.destination.root = path.destination.dev.root;
+    config_env('dev');
 });
 
 gulp.task('config.pack', () => {
     config.source.css = path.source.app.css;
     config.source.js = path.source.app.js;
+    config.source.js.push('!src/js/example.js');
     config.destination.css = path.destination.pack.css;
     config.destination.js = path.destination.pack.js;
     config.destination.root = path.destination.pack.root;
@@ -115,7 +114,7 @@ gulp.task('js', () => {
     return concat_uglify_js(config.source.js, config.destination.js);
 });
 
-gulp.task('copy_src', () => {
+gulp.task('copy.src', () => {
     const css = gulp.src(config.source.css)
         .pipe(gulp.dest(config.destination.css));
     const js = gulp.src(config.source.js)
@@ -124,7 +123,7 @@ gulp.task('copy_src', () => {
 });
 
 // Copy images of Select2 (v3.5.1) dependency to 'dist/prod/css'
-gulp.task('copy_img', () => {
+gulp.task('copy.img', () => {
     return gulp.src(config.source.img)
         .pipe(gulp.dest(config.destination.css));
 });
@@ -159,7 +158,6 @@ gulp.task('inject.dev', () => {
                 }
             }
         ))
-        .pipe(minifyHTML({collapseWhitespace: true}))
         .pipe(gulp.dest(config.destination.root));
 });
 
@@ -178,11 +176,11 @@ gulp.task('server.prod', () => {
 
 gulp.task('build.package', (done) => runSequence('config.pack', 'clean', 'css', 'js', done));
 
-gulp.task('build.dev', (done) => runSequence('config.dev', 'clean', 'copy_src', 'copy_img', 'inject.dev', done));
+gulp.task('build.dev', (done) => runSequence('config.dev', 'clean', 'copy.src', 'copy.img', 'inject.dev', done));
 
 gulp.task('serve.dev', (done) => runSequence('build.dev', 'server.dev', done));
 
-gulp.task('build.prod', (done) => runSequence('config.prod', 'clean', 'css', 'js', 'copy_img', 'inject.prod', done));
+gulp.task('build.prod', (done) => runSequence('config.prod', 'clean', 'css', 'js', 'copy.img', 'inject.prod', done));
 
 gulp.task('serve.prod', (done) => runSequence('build.prod', 'server.prod', done));
 

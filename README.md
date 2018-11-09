@@ -1,4 +1,13 @@
 # Introduction
+[//]: <> (think to update badges [version, licence] when needed because they are static)
+[//]: <> (todo : think to change these badges to refer to the official plate-map github repo)
+![version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg?style=flat-square&v=1.0)
+[![licence ISC](https://img.shields.io/badge/licence-ISC-green.svg?style=flat-square&v=1.0)](https://www.isc.org/downloads/software-support-policy/isc-license/)
+[![GitHub issues](https://img.shields.io/github/issues/Zahen/plate-map.svg?style=flat-square&v=1.0)](https://github.com/Zahen/plate-map/issues)
+[![dependencies Status](https://david-dm.org/Zahen/plate-map/status.svg?style=flat-square&v=1.0)](https://david-dm.org/Zahen/plate-map)
+[![devDependencies Status](https://david-dm.org/Zahen/plate-map/dev-status.svg?style=flat-square&v=1.0)](https://david-dm.org/Zahen/plate-map?type=dev)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+
 **JavaScript Plate Layout** is an open source tool developed collaboratively by [Chai Biotechnologies](www.chaibio.com) 
 and [New England Biolabs](www.neb.com) for visualizing and editing the layout of scientific assay plates.
 
@@ -52,14 +61,15 @@ plate-map
 
 # How to start
 ## Installation
-This project requires `Node.js` and `NPM` to be installed on your machine. Download a pre-built installer for your 
+This project requires _Node_ and _NPM_ to be installed on your machine. Download a pre-built installer for your 
 platform from  [nodejs.org](https://nodejs.org/en/download/) and install it before starting. **Note** that this 
-project was tested with Node v9.10.1 and NPM v5.6.0.
+project was tested on an environment with _Node_ v9.10.1 and _NPM_ v5.6.0.
 
-If you're new to NPM, you can get to know it better from [what-is-npm?](https://docs.npmjs.com/getting-started/what-is-npm).
+> If you're new to _NPM_, you can get to know it better from 
+[What-Is-NPM?](https://docs.npmjs.com/getting-started/what-is-npm).
 
-The project requires also `gif_lib` and `jpeg_lib` to be installed on your machine. **Note** that these libraries are 
-used by the NPM package Canvas which the project depends-on. 
+The project requires also the libraries _gif_lib_ and _jpeg_lib_ to be installed on your machine. **Note** that these 
+libraries are used by the _NPM_ package _Canvas_ which the project depends-on. To install those libraries : 
 
 - For Linux/Ubuntu :
     ```bash
@@ -73,27 +83,57 @@ used by the NPM package Canvas which the project depends-on.
     ```
    
 ## Automatic Workflow
-The project uses [Gulp](https://gulpjs.com/) to automate and enhance the workflow. Like that, the application can run
-custom defined repetitious tasks and manages process automation.
+The project uses _Gulp_ to automate and enhance the workflow. So the application can run custom 
+defined repetitious tasks and manages process automation.
 
-All Gulp configuration goes in `gulpfile.js` in the root of the project. This file contains all the tasks we created to 
-build and serve the application in both development and production environments. 
+> For more information about _Gulp_, see [Gulp Website](https://gulpjs.com/).
+
+All _Gulp_ configuration goes in `gulpfile.js` in the root of the project. This file contains all the tasks we created
+to build and serve the application in both development and production environments. 
 
 A pattern for writing tasks is that you first load a package you're about to use and then define a task which is based 
-on that package. **Note** that you should install the package you're about to use it before load it.
+on that package. **Note** that you should install the package you're about to use it before load it. 
+
+Here is an example about using _Gulp_:
+
+- In your terminal:
+    ```bash
+    # install `gulp` if you don't have it
+    npm install gulp
+    ```
+- In a `gulpfile.js`:
+    ```js
+    // load gulp
+    var gulp = require('gulp');
+    
+    // basic syntax of a gulp task
+    // task-name would be used whenever you want to run a task in Gulp.
+    gulp.task('task-name', function() {
+      // stuff here
+    });
+    ```
+- In your terminal:
+    ```bash
+    # you can run this task in the command line by writing
+    gulp task-name
+    ```
+
+> _NPM_ can be also used as a tasks runner, you can easily run tasks by adding them to the 'scripts' field in 
+`package.json` and run them with `npm run <task-name>`. Run `npm run` to see available tasks.
 
 Please, have a look at `gulpfile.js` for more details about the available tasks of this projects.
 
 ## Dev Environment
 This development environment creates a directory called `dist/dev` to stuff all JS, CSS and HTML files. The environment 
-is served by `BrowserSync` (an NPM package) that allows live reloads (change your code and the page will be auto-reloaded) 
-and interaction synchronization (all your actions are mirrored across every browser). So developers can modify the source
-code under the directory `src`, and the application will be updated automatically across every browser. For more details 
-about BrowserSync, see [BrowserSync](https://browsersync.io/). 
+is served by _BrowserSync_ (an _NPM_ package) that allows live reloads (change your code and the page will be 
+auto-reloaded) and interaction synchronization (all your actions are mirrored across every browser). So developers can 
+modify the source code under the directory `src`, and the application will be updated automatically across every browser. 
+
+> For more details about _BrowserSync_, see [BrowserSync Website](https://browsersync.io/). 
 
 To run the application in development mode : 
 ```bash
-# install all needed dependencies under the directory `node_modules` in the root of the project, if this is your first time here
+# if this is your first time here, install all needed dependencies in `node_modules` in the root of the project
 npm install
 # compile the development application in `dist/dev` and serve it
 npm start # or npm run serve.dev
@@ -101,10 +141,12 @@ npm start # or npm run serve.dev
 Please have a look at `package.json` for more tasks.
 
 ## Prod Environment
-This production environment concatenates both CSS files in one minified file and JS files in one uglified file. For more details 
-about 'Minification', see [Minification in programming](https://en.wikipedia.org/wiki/Minification_(programming)).
-The environment creates also a directory called `dist/prod` to stuff the JS, CSS and HTML minified files. **Note** that 
-this environment uses a simple server instead of BrowserSync.
+This production environment concatenates both CSS files in one minified file and JS files in one uglified file. 
+
+> For more details about 'Minification', see [Minification Wiki](https://en.wikipedia.org/wiki/Minification_(programming)).
+
+The production environment creates also a directory called `dist/prod` to stuff the JS, CSS and HTML minified files. 
+**Note** that this environment uses a simple server to serve the application instead of _BrowserSync_.
 
 To run the application in production mode : 
 ```bash
@@ -114,12 +156,12 @@ npm run serve.prod
 Again, please see `package.json` for more flavors of tasks.
 
 ## Package Build
-We also created an NPM package which can be used by others projects. This package contains :
+We also created an _NPM_ package which can be used by others projects. This package contains :
 - main.min.css (minified CSS file that concatenates all CSS source files)
 - main.min.js (uglified JS file that concatenates all JS source files)
 - package.json (JSON file that mainly defines all the required dependencies and tasks af the package)
 
-`Todo`, this package is available on [NPM](http://npmjs.com). 
+[//]: <> (todo : this package is available on [NPM_Link])
 
 To build this package on your machine : 
 ```bash
@@ -128,7 +170,7 @@ npm run build.package
 ```
 
 # Usage
-The source file `src/js/plate-map-main.js` (showed below) initializes the plate layout tool. See Configurations Options
+The source file `src/js/main.js` (showed below) initializes the plate layout tool. See Configurations Options
 for all available settings.
 ```js
   window.onload = function() {
