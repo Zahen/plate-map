@@ -6,7 +6,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/Zahen/plate-map.svg?style=flat-square&v=1.0)](https://github.com/Zahen/plate-map/issues)
 [![dependencies Status](https://david-dm.org/Zahen/plate-map/status.svg?style=flat-square&v=1.0)](https://david-dm.org/Zahen/plate-map)
 [![devDependencies Status](https://david-dm.org/Zahen/plate-map/dev-status.svg?style=flat-square&v=1.0)](https://david-dm.org/Zahen/plate-map?type=dev)
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
 **JavaScript Plate Layout** is an open source tool developed collaboratively by [Chai Biotechnologies](www.chaibio.com) 
 and [New England Biolabs](www.neb.com) for visualizing and editing the layout of scientific assay plates.
@@ -143,7 +142,8 @@ Please have a look at `package.json` for more tasks.
 ## Prod Environment
 This production environment concatenates both CSS files in one minified file and JS files in one uglified file. 
 
-> For more details about 'Minification', see [Minification Wiki](https://en.wikipedia.org/wiki/Minification_(programming)).
+> For more details about 'Minification', see 
+[Minification in Programming](https://en.wikipedia.org/wiki/Minification_(programming)).
 
 The production environment creates also a directory called `dist/prod` to stuff the JS, CSS and HTML minified files. 
 **Note** that this environment uses a simple server to serve the application instead of _BrowserSync_.
