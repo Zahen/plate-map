@@ -1,6 +1,9 @@
-.idea
+#IDE configuration files
+.idea/*
+!.idea/runConfigurations
+*.iml
 
 nodes_modules
 
-# *.DS_Store
-# dist
+*.DS_Store
+dist

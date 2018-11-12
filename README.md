@@ -1,6 +1,6 @@
 # Introduction
-<!-- think to update badges [version, licence] when needed because they are static -->
-<!-- todo : think to change these badges to refer to the official plate-map github repo -->
+<!-- remember to update badges [version, licence] when needed because they are static -->
+<!-- todo : remember to change these badges to refer to the official plate-map github repo -->
 ![version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg?style=flat-square&v=1.0)
 [![licence ISC](https://img.shields.io/badge/licence-ISC-green.svg?style=flat-square&v=1.0)](https://www.isc.org/downloads/software-support-policy/isc-license/)
 [![GitHub issues](https://img.shields.io/github/issues/Zahen/plate-map.svg?style=flat-square&v=1.0)](https://github.com/Zahen/plate-map/issues)
@@ -23,14 +23,13 @@ utilized in the context of a larger scientific software application.
 # Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
-- [Project Structure](#project-structure)
-- [How to start](#how-to-start)
 - [Usage](#usage)
 - [User-Provided Callback Functions](#user-provided-callback-functions)
 - [Major Functions](#major-functions)
 - [Data Types](#data-types)
 - [Exemple 1](#example-1-multiplex-field-without-sub-field-multiplex-units)
 - [Exemple 2](#example-2-multiplex-field-with-multiplex-unit-sub-fields)
+- [How to contribute](#how-to-contribute)
 
 # Features
 - Assign and edit up to roughly 25 data attributes to plates ranging from 8 to 96 wells
@@ -44,133 +43,22 @@ utilized in the context of a larger scientific software application.
 - Read only plate map
 - Edit only mode to disable add new wells and delete existing wells.
 
-# Project Structure
-This project has the following structure : 
-```
-plate-map
-    ├── src
-    |   ├── css
-    |   │   └── *.css
-    |   └── js
-    |       └── *.js
-    ├── index.html
-    ├── gulpfile.js
-    └── package.json
-```
+# Usage
 
-# How to start
-## Installation
-This project requires _Node_ and _NPM_ to be installed on your machine. Download a pre-built installer for your 
-platform from  [nodejs.org](https://nodejs.org/en/download/) and install it before starting. **Note** that this 
-project was tested on an environment with _Node_ v9.10.1 and _NPM_ v5.6.0.
+## Install
+<!-- This package is available on [NPM_Link] -->
+The standard way to integrate this library in your project is to use `npm`.
 
-> If you're new to _NPM_, you can get to know it better from 
+> If you are new to _NPM_, you can get to know it better here 
 [What-Is-NPM?](https://docs.npmjs.com/getting-started/what-is-npm).
 
-The project requires also the libraries _gif_lib_ and _jpeg_lib_ to be installed on your machine. **Note** that these 
-libraries are used by the _NPM_ package _Canvas_ which the project depends-on. To install those libraries : 
+To install this package:
 
-- For Linux/Ubuntu :
-    ```bash
-    sudo apt install libgif-dev
-    sudo apt install libjpeg-dev
-    ```
-- For Mac OS :
-    ```bash
-    brew install giflib
-    brew install libjpeg
-    ```
-   
-## Automatic Workflow
-The project uses _Gulp_ to automate and enhance the workflow. So the application can run custom 
-defined repetitious tasks and manages process automation.
+    npm install plate-map --save
 
-> For more information about _Gulp_, see [Gulp Website](https://gulpjs.com/).
 
-All _Gulp_ configuration goes in `gulpfile.js` in the root of the project. This file contains all the tasks we created
-to build and serve the application in both development and production environments. 
-
-A pattern for writing tasks is that you first load a package you're about to use and then define a task which is based 
-on that package. **Note** that you should install the package you're about to use it before load it. 
-
-Here is an example about using _Gulp_:
-
-- In your terminal:
-    ```bash
-    # install `gulp` if you don't have it
-    npm install gulp
-    ```
-- In a `gulpfile.js`:
-    ```js
-    // load gulp
-    var gulp = require('gulp');
-    
-    // basic syntax of a gulp task
-    // task-name would be used whenever you want to run a task in Gulp.
-    gulp.task('task-name', function() {
-      // stuff here
-    });
-    ```
-- In your terminal:
-    ```bash
-    # you can run this task in the command line by writing
-    gulp task-name
-    ```
-
-> _NPM_ can be also used as a tasks runner, you can easily run tasks by adding them to the 'scripts' field in 
-`package.json` and run them with `npm run <task-name>`. Run `npm run` to see available tasks.
-
-Please, have a look at `gulpfile.js` for more details about the available tasks of this projects.
-
-## Dev Environment
-This development environment creates a directory called `dist/dev` to stuff all JS, CSS and HTML files. The environment 
-is served by _BrowserSync_ (an _NPM_ package) that allows live reloads (change your code and the page will be 
-auto-reloaded) and interaction synchronization (all your actions are mirrored across every browser). So developers can 
-modify the source code under the directory `src`, and the application will be updated automatically across every browser. 
-
-> For more details about _BrowserSync_, see [BrowserSync Website](https://browsersync.io/). 
-
-To run the application in development mode : 
-```bash
-# if this is your first time here, install all needed dependencies in `node_modules` in the root of the project
-npm install
-# compile the development application in `dist/dev` and serve it
-npm start # or npm run serve.dev
-```
-Please have a look at `package.json` for more tasks.
-
-## Prod Environment
-This production environment concatenates both CSS files in one minified file and JS files in one uglified file. 
-
-> For more details about 'Minification', see 
-[Minification in Programming](https://en.wikipedia.org/wiki/Minification_(programming)).
-
-The production environment creates also a directory called `dist/prod` to stuff the JS, CSS and HTML minified files. 
-**Note** that this environment uses a simple server to serve the application instead of _BrowserSync_.
-
-To run the application in production mode : 
-```bash
-# compile the production application in `dist/prod` and serve it
-npm run serve.prod
-```
-Again, please see `package.json` for more flavors of tasks.
-
-## Package Build
-We also created an _NPM_ package which can be used by others projects. This package contains :
-- main.min.css (minified CSS file that concatenates all CSS source files)
-- main.min.js (uglified JS file that concatenates all JS source files)
-- package.json (JSON file that mainly defines all the required dependencies and tasks af the package)
-
-<!-- this package is available on [NPM_Link] -->
-
-To build this package on your machine : 
-```bash
-# compile the package in `dist/pack`
-npm run build.package
-```
-
-# Usage
-The source file `src/js/example.js` (showed below) initializes the plate layout tool. See Configurations Options
+## Quick start
+The source file `src/js/example.js` (shown below) initializes the plate layout tool. See Configurations Options
 for all available settings.
 ```js
   window.onload = function() {
@@ -545,3 +433,122 @@ condition there is a corresponding `unitOptions`. `unitOptions` is used to filte
 condition. For instance, if the user chooses option "a" in the single select field, the corresponding list of unit 
 options for subfield id `raw_value` will be `["unit1", "unit2"]` , which is used to filter the unit options in the 
 `condition_amt` field. `condition_amt` will only have unit options `["unit1", "unit2"]` after the filtering.
+
+# How to contribute
+
+## Requirements
+**Note** that this project was tested with _Node_ v9.10.1 and _NPM_ v5.6.0.
+
+If this is your first time, start by installing the npm dependencies: `npm install`
+
+Building this project also requires the libraries _gif_lib_ and _jpeg_lib_ (required the _Canvas_ npm package).
+
+- On Linux/Ubuntu :
+    ```bash
+    sudo apt install libgif-dev
+    sudo apt install libjpeg-dev
+    ```
+- On Mac OS :
+    ```bash
+    brew install giflib
+    brew install libjpeg
+    ```
+   
+## Project Structure
+```
+plate-map
+    ├── src
+    |   ├── css
+    |   │   └── *.css
+    |   ├── js
+    |   │   └── *.js
+    /   ├── index.html
+    ├── gulpfile.js
+    └── package.json
+```
+
+## Automated Workflow
+This project makes use of _Gulp_ to automate and enhance some parts of the workflow, so that developers can spend less
+time on repetitive tasks, and rely on a more reproducible process.
+
+> For more information about _Gulp_, see [Gulp Website](https://gulpjs.com/).
+
+The _Gulp_ configuration sits in `gulpfile.js`, at the root of the project. This file contains some common tasks used to
+build and serve both development and production environments, as well as build the package for release.
+
+A common pattern for writing tasks is to first load the required gulp package, then define the task itself.
+**Note** that you may need to `npm install` gulp packages, if they are not listed in `package.json` already. Please
+remember to commit `package.json` each time you add a dependency.
+
+Here is an example of how to use _Gulp_:
+
+- In your terminal:
+    ```bash
+    # install `gulp` if you don't have it
+    npm install gulp
+    ```
+- In a `gulpfile.js`:
+    ```js
+    // load gulp
+    var gulp = require('gulp');
+    
+    // basic syntax of a gulp task
+    // task-name would be used whenever you want to run a task in Gulp.
+    gulp.task('task-name', function() {
+      // stuff here
+    });
+    ```
+- In your terminal:
+    ```bash
+    # you can run this task in the command line by writing
+    gulp task-name
+    ```
+
+> _NPM_ can be also used as a tasks runner, you can easily run tasks by adding them to the 'scripts' field in 
+`package.json` then run them with `npm run <task-name>`. Run `npm run` to see available tasks.
+
+Please have a look at `gulpfile.js` for more details on the available tasks of this projects.
+
+## Dev Environment
+The development build task outputs the application files in `dist/dev/`. These files are served by _BrowserSync_,
+a development server which offers features like:
+- live reload: automatically rebuild `src` into `dist/dev` and refresh the browser(s) after each change in code
+- interactions synchronization: user actions can be mirrored across multiple browsers open simultaneously
+
+> For more details about _BrowserSync_, see [BrowserSync Website](https://browsersync.io/). 
+
+To serve the application in dev mode : 
+```bash
+npm start # or npm run serve.dev
+```
+
+## Prod Environment
+The production build task outputs the minified application files in `dist/prod/`. These files contain both the project 
+source code and the production dependencies. This directory is therefore ready to be served as a standalone application by
+a production server (eg. nginx). This project is configured to use a `connect` server.
+
+> For more details about 'Minification', see 
+[Minification in Programming](https://en.wikipedia.org/wiki/Minification_(programming)).
+
+To serve the application in production mode:
+```bash
+npm run serve.prod
+```
+
+## Release
+The 'package' build task outputs the minified application files in `dist/pack/`. These files only contain the minified
+source code of the app, and therefore cannot be served as such. Their purpose it to be released as an `npm` package,
+that can then be integrated in dependent projects. It is up to each dependent project to build its own production bundle(s),
+with a proper handling of the transitive dependencies.
+
+The `plate-map` _NPM_ package contains:
+- `main.min.css` (app CSS source files concatenated and minified)
+- `main.min.js`  (app JS source files concatenated and uglified)
+- `package.json` (dependencies and tasks of the package)
+
+To build this package on your machine: 
+```bash
+npm run build.package
+# test
+# release to npm
+```
