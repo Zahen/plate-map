@@ -22,14 +22,13 @@
   },
   "homepage": "https://github.com/Zahen/plate-map#readme",
   "dependencies": {
-    "bootstrap": "4.1.3",
-    "clipboard": "1.7.1",
-    "fabric": "1.6.0",
-    "jquery": "3.3.1",
-    "jquery-ui-dist": "1.12.1",
-    "jsdom": "^13.0.0",
-    "popper.js": "1.14.3",
-    "select2": "3.5.1"
+    "bootstrap": "^4.1.3",
+    "clipboard": "^2.0.4",
+    "fabric": "^2.4.3",
+    "jquery": "^3.3.1",
+    "jquery-ui-dist": "^1.12.1",
+    "popper.js": "^1.14.5",
+    "select2": "^3.5.1"
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",

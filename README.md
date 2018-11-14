@@ -46,20 +46,49 @@ utilized in the context of a larger scientific software application.
 # Usage
 
 ## Install
-<!-- This package is available on [NPM_Link] -->
+<!-- todo : This package is available on [NPM_Link] -->
 The standard way to integrate this library in your project is to use `npm`.
 
 > If you are new to _NPM_, you can get to know it better here 
 [What-Is-NPM?](https://docs.npmjs.com/getting-started/what-is-npm).
 
 To install this package:
+```bash
+npm install plate-map --save
+```
 
-    npm install plate-map --save
+## Include dependencies
+After installing this package, _NPM_ creates a `node_modules` directory in the root of your project. This directory 
+contains all the required dependencies to make use of our package. You need therefore to include all these dependencies 
+in your project to use this package.
 
+You need to include the following dependencies: 
+<!-- todo: change plate-map paths to correspond to the real npm package when released plate-map/dist/css, ... -->
+- Stylesheets: 
+    ```
+    'node_modules/bootstrap/dist/css/bootstrap.min.css'
+    'node_modules/select2/select2.css'
+    'node_modules/plate-map/dist/package/css/main.min.css'
+    ```
+- Javascript:
+    ```
+    'node_modules/jquery/dist/jquery.min.js'
+    'node_modules/bootstrap/dist/js/bootstrap.min.js'
+    'node_modules/select2/select2.js'
+    'node_modules/jquery-ui-dist/jquery-ui.min.js'
+    'node_modules/fabric/dist/fabric.js'
+    'node_modules/clipboard/dist/clipboard.min.js'
+    'node_modules/plate-map/dist/package/js/main.min.js'
+    ``` 
 
 ## Quick start
+Embed code similar to the below to add the plate layout tool to your project: 
+```html
+<div id="my-plate-layout"></div>
+```
 The source file `src/js/example.js` (shown below) initializes the plate layout tool. See Configurations Options
-for all available settings.
+for all available settings. **Note** that this source file is not included in the npm package, but it is available on 
+the Github repository.  
 ```js
   window.onload = function() {
     //Define fields to hold data
@@ -462,7 +491,7 @@ plate-map
     |   │   └── *.css
     |   ├── js
     |   │   └── *.js
-    /   ├── index.html
+    /   └── index.html
     ├── gulpfile.js
     └── package.json
 ```
@@ -481,7 +510,6 @@ A common pattern for writing tasks is to first load the required gulp package, t
 remember to commit `package.json` each time you add a dependency.
 
 Here is an example of how to use _Gulp_:
-
 - In your terminal:
     ```bash
     # install `gulp` if you don't have it
@@ -503,6 +531,7 @@ Here is an example of how to use _Gulp_:
     # you can run this task in the command line by writing
     gulp task-name
     ```
+More examples about how to use _Gulp_ are available here [Gulp For Beginners](https://css-tricks.com/gulp-for-beginners/).
 
 > _NPM_ can be also used as a tasks runner, you can easily run tasks by adding them to the 'scripts' field in 
 `package.json` then run them with `npm run <task-name>`. Run `npm run` to see available tasks.
@@ -551,4 +580,31 @@ To build this package on your machine:
 npm run build.package
 # test
 # release to npm
+```
+
+## Add External Dependencies
+If you want to external dependencies to the Plate-Layout tool, you can follow the next steps: 
+
+- Install the npm dependency: 
+    ```bash
+    npm install 'package_name'
+    ```
+- In the gulpfile.js, add the new dependency path(s) to the constant PATH under the dependencies key. For example, if 
+your dependency has just a javascript distribution file `dist/js/index.js`, the PATH constant in the gulpfile.js should 
+look like this:
+```js
+const PATH = {
+    source: {
+        app: {...},
+        dependencies: {
+            css: [...],
+            js: [
+                ...,
+                'node_modules/your-package/dist/index.js'
+            ],
+            img: [...]
+        },
+    },
+    destination: {...} 
+};
 ```

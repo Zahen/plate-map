@@ -11,7 +11,7 @@ const browserSync = require('browser-sync').create();
 const connect = require('gulp-connect');
 const mergeStream = require('merge-stream');
 
-const path = {
+const PATH = {
     source: {
         app: {
             css: ['src/css/*.css'],
@@ -75,13 +75,13 @@ function concat_uglify_js(source, destination) {
 }
 
 function config_env(env) {
-    config.source.css = path.source.dependencies.css.concat(path.source.app.css);
-    config.source.js = path.source.dependencies.js.concat(path.source.app.js);
-    config.source.img = path.source.dependencies.img;
-    config.source.html = path.source.app.html;
-    config.destination.css = path.destination[env].css;
-    config.destination.js = path.destination[env].js;
-    config.destination.root = path.destination[env].root;
+    config.source.css = PATH.source.dependencies.css.concat(PATH.source.app.css);
+    config.source.js = PATH.source.dependencies.js.concat(PATH.source.app.js);
+    config.source.img = PATH.source.dependencies.img;
+    config.source.html = PATH.source.app.html;
+    config.destination.css = PATH.destination[env].css;
+    config.destination.js = PATH.destination[env].js;
+    config.destination.root = PATH.destination[env].root;
 }
 
 gulp.task('config.prod', () => {
@@ -93,12 +93,12 @@ gulp.task('config.dev', () => {
 });
 
 gulp.task('config.pack', () => {
-    config.source.css = path.source.app.css;
-    config.source.js = path.source.app.js;
+    config.source.css = PATH.source.app.css;
+    config.source.js = PATH.source.app.js;
     config.source.js.push('!src/js/example.js');
-    config.destination.css = path.destination.pack.css;
-    config.destination.js = path.destination.pack.js;
-    config.destination.root = path.destination.pack.root;
+    config.destination.css = PATH.destination.pack.css;
+    config.destination.js = PATH.destination.pack.js;
+    config.destination.root = PATH.destination.pack.root;
 });
 
 gulp.task('clean', () => {
@@ -163,7 +163,7 @@ gulp.task('inject.dev', () => {
 
 gulp.task('server.dev', () => {
     browserSync.init({server: 'dist/dev'});
-    gulp.watch([path.source.app.css, path.source.app.js], ['build.dev'])
+    gulp.watch([PATH.source.app.css, PATH.source.app.js], ['build.dev'])
         .on('change', browserSync.reload);
 });
 
