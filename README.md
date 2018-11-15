@@ -2,7 +2,7 @@
 <!-- remember to update badges [version, licence] when needed because they are static -->
 <!-- todo : remember to change these badges to refer to the official plate-map github repo -->
 ![version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg?style=flat-square&v=1.0)
-[![licence ISC](https://img.shields.io/badge/licence-ISC-green.svg?style=flat-square&v=1.0)](https://www.isc.org/downloads/software-support-policy/isc-license/)
+[![licence ISC](https://img.shields.io/badge/licence-ISC-blue.svg?style=flat-square&v=1.0)](https://www.isc.org/downloads/software-support-policy/isc-license/)
 [![GitHub issues](https://img.shields.io/github/issues/Zahen/plate-map.svg?style=flat-square&v=1.0)](https://github.com/Zahen/plate-map/issues)
 [![dependencies Status](https://david-dm.org/Zahen/plate-map/status.svg?style=flat-square&v=1.0)](https://david-dm.org/Zahen/plate-map)
 [![devDependencies Status](https://david-dm.org/Zahen/plate-map/dev-status.svg?style=flat-square&v=1.0)](https://david-dm.org/Zahen/plate-map?type=dev)
