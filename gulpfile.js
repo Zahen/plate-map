@@ -16,7 +16,8 @@ const PATH = {
         app: {
             css: ['src/css/*.css'],
             js: ['src/js/*.js'],
-            html: 'src/index.html'
+            html: 'src/index.html',
+            json: 'package.json'
         },
         dependencies: {
             css: [
@@ -56,7 +57,7 @@ const PATH = {
     }
 };
 
-let config = {source: {css: '', js: '', img: '', html: ''}, destination: {css: '', js: '', root: ''}};
+let config = {source: {css: '', js: '', img: '', html: '', json: ''}, destination: {css: '', js: '', root: ''}};
 
 function concat_minify_css(source, destination) {
     return gulp.src(source)
@@ -96,6 +97,7 @@ gulp.task('config.pack', () => {
     config.source.css = PATH.source.app.css;
     config.source.js = PATH.source.app.js;
     config.source.js.push('!src/js/example.js');
+    config.source.json = PATH.source.app.json;
     config.destination.css = PATH.destination.pack.css;
     config.destination.js = PATH.destination.pack.js;
     config.destination.root = PATH.destination.pack.root;
@@ -126,6 +128,11 @@ gulp.task('copy.src', () => {
 gulp.task('copy.img', () => {
     return gulp.src(config.source.img)
         .pipe(gulp.dest(config.destination.css));
+});
+
+gulp.task('copy.package.json', () => {
+   return gulp.src(config.source.json)
+       .pipe(gulp.dest(config.destination.root));
 });
 
 gulp.task('inject.prod', () => {
@@ -174,7 +181,7 @@ gulp.task('server.prod', () => {
     });
 });
 
-gulp.task('build.package', (done) => runSequence('config.pack', 'clean', 'css', 'js', done));
+gulp.task('build.package', (done) => runSequence('config.pack', 'clean', 'css', 'js', 'copy.package.json', done));
 
 gulp.task('build.dev', (done) => runSequence('config.dev', 'clean', 'copy.src', 'copy.img', 'inject.dev', done));
 
