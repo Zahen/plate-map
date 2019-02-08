@@ -11,25 +11,25 @@ $.widget("DNA.plateLayOut", {
   addressToLoc: function (layoutAddress) {
     var m = /^([A-Z]+)(\d+)$/.exec(layoutAddress.trim().toUpperCase())
     if (m) {
-      var row_v = m[1]; 
+      var row_v = m[1];
       var col = parseInt(m[2])-1;
-      var row; 
+      var row;
       for (var i = 0; i < row_v.length; i++) {
-        var c = row_v.charCodeAt(i) - 65; 
+        var c = row_v.charCodeAt(i) - 65;
         if (i) {
             row += 1;
-            row *= 26; 
-            row += c ; 
+            row *= 26;
+            row += c ;
         } else {
             row = c;
         }
       }
       return {
-        r: row, 
+        r: row,
         c: col
       };
     } else {
-      throw layoutAddress + " not a proper layout address"; 
+      throw layoutAddress + " not a proper layout address";
     }
   },
 
@@ -41,18 +41,18 @@ $.widget("DNA.plateLayOut", {
       t
     }
     if (!(loc.r >= 0 && loc.r < dimensions.rows)) {
-      throw "Row index " + (loc.r + 1) + " invalid"; 
+      throw "Row index " + (loc.r + 1) + " invalid";
     }
     if (!(loc.c >= 0 && loc.c < dimensions.cols)) {
-      throw "Column index " + (loc.c + 1) + " invalid"; 
+      throw "Column index " + (loc.c + 1) + " invalid";
     }
-    return loc.r*dimensions.cols + loc.c; 
+    return loc.r*dimensions.cols + loc.c;
   },
 
   addressToIndex: function (layoutAddress, dimensions) {
-    var loc = this.addressToLoc(layoutAddress); 
-    return this.locToIndex(loc, dimensions); 
-  }, 
+    var loc = this.addressToLoc(layoutAddress);
+    return this.locToIndex(loc, dimensions);
+  },
 
   _rowKey: function (i) {
     var c1 = i % 26;
@@ -62,7 +62,7 @@ $.widget("DNA.plateLayOut", {
       code = String.fromCharCode(64 + c2) + code;
     }
     return code;
-  }, 
+  },
 
   indexToLoc: function (index, dimensions) {
     if (!dimensions) {
@@ -70,13 +70,13 @@ $.widget("DNA.plateLayOut", {
     }
 
     if (index >= dimensions.rows * dimensions.cols) {
-      throw "Index too high: " + index.toString(10); 
+      throw "Index too high: " + index.toString(10);
     }
-    var loc = {}; 
+    var loc = {};
     loc.c = index % dimensions.cols;
     loc.r = (index - loc.c) / dimensions.cols;
 
-    return loc; 
+    return loc;
   },
 
   locToAddress: function (loc) {
@@ -84,8 +84,8 @@ $.widget("DNA.plateLayOut", {
   },
 
   indexToAddress: function (index, dimensions) {
-    var loc = this.indexToLoc(index, dimensions); 
-    return this.locToAddress(loc); 
+    var loc = this.indexToLoc(index, dimensions);
+    return this.locToAddress(loc);
   },
 
   getDimensions: function () {
@@ -231,13 +231,54 @@ $.widget("DNA.plateLayOut", {
     }
     var selectedObjects = {};
     var derivative = this.engine.derivative;
-    for (var loc in derivative){
-      var address = this.indexToAddress(loc);
+    for (var index in derivative){
+      var address = this.indexToAddress(index);
       if (selectedAddress.indexOf(address) >= 0) {
-        selectedObjects[address] = derivative[loc];
+        color = this.engine.colorMap.get(Number(index));
+        var well = JSON.parse(JSON.stringify(derivative[index]));
+        well.colorIndex = color;
+        selectedObjects[address] = well;
       }
     }
     return selectedObjects;
+  },
+
+  selectObjectInBottomTab: function () {
+    var selectedObjects = this.getSelectedObject();
+    var selectedObjectAddress;
+    for (var prop in selectedObjects) {
+      if (!selectedObjectAddress) {
+        selectedObjectAddress = prop;
+      } else {
+        return;  // scroll to matching group only if a single well has been selected
+      }
+    }
+    var colorIndex = selectedObjects[selectedObjectAddress].colorIndex;
+    var tableContainer = document.getElementsByClassName('plate-setup-bottom-table-container');
+    var allCells = document.getElementsByClassName('plate-setup-bottom-id');
+    for (var i=0; i < allCells.length; i++) {
+      var cell = allCells[i];
+      cell.style.borderTop = cell.style.borderBottom = '';
+      cell.nextSibling.style.background = '#ffffff';
+      cell.querySelector('button').style.fontWeight = cell.nextSibling.style.fontWeight = '';
+      if (cell.querySelector('button').innerHTML === colorIndex.toString()) {
+        cell.style.borderTop = cell.style.borderBottom = '3px solid #00d4ff';
+        cell.nextSibling.style.background = 'linear-gradient(263deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%)';
+        cell.querySelector('button').style.fontWeight = cell.nextSibling.style.fontWeight = 'bold';
+        this.scrollTo(tableContainer, cell.offsetTop, 300);
+      }
+    }
+  },
+  // https://stackoverflow.com/questions/17733076/smooth-scroll-anchor-links-without-jquery
+  scrollTo: function (element, to, duration) {
+    if (duration <= 0) return;
+    var difference = to - element.scrollTop;
+    var perTick = difference / duration * 10;
+    setTimeout(function() {
+      element.scrollTop = element.scrollTop + perTick;
+      if (element.scrollTop === to) return;
+      scrollTo(element, to, duration - 10);
+    }, 10);
   },
 
   getSelectedIndex: function() {

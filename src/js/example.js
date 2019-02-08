@@ -202,6 +202,9 @@ window.onload = function () {
         },
         created: function (event, data) {
             console.log("Created");
+        },
+        selectedWells: function(event, data) {
+            $("#my-plate-layout").plateLayOut("selectObjectInBottomTab");
         }
     });
     window.plateData = makeNewPlate();
