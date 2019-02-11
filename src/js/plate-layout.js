@@ -253,32 +253,23 @@ $.widget("DNA.plateLayOut", {
         return;  // scroll to matching group only if a single well has been selected
       }
     }
-    var colorIndex = selectedObjects[selectedObjectAddress].colorIndex;
-    var tableContainer = document.getElementsByClassName('plate-setup-bottom-table-container');
-    var allCells = document.getElementsByClassName('plate-setup-bottom-id');
-    for (var i=0; i < allCells.length; i++) {
-      var cell = allCells[i];
-      cell.style.borderTop = cell.style.borderBottom = '';
-      cell.nextSibling.style.background = '#ffffff';
-      cell.querySelector('button').style.fontWeight = cell.nextSibling.style.fontWeight = '';
-      if (cell.querySelector('button').innerHTML === colorIndex.toString()) {
-        cell.style.borderTop = cell.style.borderBottom = '3px solid #00d4ff';
-        cell.nextSibling.style.background = 'linear-gradient(263deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%)';
-        cell.querySelector('button').style.fontWeight = cell.nextSibling.style.fontWeight = 'bold';
-        this.scrollTo(tableContainer, cell.offsetTop, 300);
-      }
+    if (selectedObjects[selectedObjectAddress]) {
+      var colorIndex = selectedObjects[selectedObjectAddress].colorIndex;
+      var tableContainer = document.querySelector('.plate-setup-bottom-table-container');
+        var allCells = document.querySelectorAll('.plate-setup-bottom-id');
+        for (var i = 0; i < allCells.length; i++) {
+          var cell = allCells[i];
+          cell.style.borderTop = cell.style.borderBottom = '';
+          cell.nextSibling.style.background = '#ffffff';
+          cell.querySelector('button').style.fontWeight = cell.nextSibling.style.fontWeight = '';
+          if (cell.querySelector('button').innerHTML === colorIndex.toString()) {
+            cell.style.borderTop = cell.style.borderBottom = '3px solid #93f9b9';
+            cell.nextSibling.style.background = 'linear-gradient(263deg, #1d976c 0%, #93f9b9 100%)';
+            cell.querySelector('button').style.fontWeight = cell.nextSibling.style.fontWeight = 'bold';
+            scrollTo(tableContainer, cell.offsetTop, 300);
+          }
+        }
     }
-  },
-  // https://stackoverflow.com/questions/17733076/smooth-scroll-anchor-links-without-jquery
-  scrollTo: function (element, to, duration) {
-    if (duration <= 0) return;
-    var difference = to - element.scrollTop;
-    var perTick = difference / duration * 10;
-    setTimeout(function() {
-      element.scrollTop = element.scrollTop + perTick;
-      if (element.scrollTop === to) return;
-      scrollTo(element, to, duration - 10);
-    }, 10);
   },
 
   getSelectedIndex: function() {
@@ -326,3 +317,15 @@ $.widget("DNA.plateLayOut", {
   }
 
 });
+
+// https://stackoverflow.com/questions/17733076/smooth-scroll-anchor-links-without-jquery
+function scrollTo(element, to, duration) {
+    if (duration <= 0) return;
+    var difference = to - element.scrollTop;
+    var perTick = difference / duration * 10;
+    setTimeout(function () {
+        element.scrollTop = element.scrollTop + perTick;
+        if (element.scrollTop === to) return;
+        scrollTo(element, to, duration - 10);
+    }, 10);
+}
