@@ -6,59 +6,48 @@ var plateLayOutWidget = plateLayOutWidget || {};
     // interface holds all the methods to put the interface in place
     return {
 
-      _createInterface: function() {
-
+        _createTopLeft: function() {
         var divIdentifier = '<div></div>';
-        this.container = this._createElement(divIdentifier).addClass("plate-setup-wrapper");
-        this.topSection = this._createElement(divIdentifier).addClass("plate-setup-top-section");
-
         this.topLeft = this._createElement(divIdentifier).addClass("plate-setup-top-left");
-        this.topRight = this._createElement(divIdentifier).addClass("plate-setup-top-right");
-
         this.overLayContainer = this._createElement(divIdentifier).addClass("plate-setup-overlay-container");
         this.canvasContainer = this._createElement(divIdentifier).addClass("plate-setup-canvas-container");
-
         this._createOverLay();
         $(this.topLeft).append(this.overLayContainer);
-
         this._createCanvas();
         $(this.topLeft).append(this.canvasContainer);
-
-
-        $(this.topSection).append(this.topLeft);
-        $(this.topSection).append(this.topRight);
-
-        $(this.container).append(this.topSection);
-        $(this.element).append(this.container);
-
+        $(this.element).append(this.topLeft);
         this._initiateFabricCanvas();
-
-        this._createTabAtRight();
-        this._createTabs();
-
-        this._placePresetTabs();
-        // Bottom of the screen
-        this._bottomScreen();
         // Canvas
         this._canvas();
-
-        this.bottomForFirstTime();
-
         var that = this;
         this._setShortcuts();
         $(document.body).keyup(function(e) {
           that._handleShortcuts(e);
         });
-
         this._configureUndoRedoArray();
       },
+
+     _createTopRight: function() {
+          var divIdentifier = '<div></div>';
+          this.topRight = this._createElement(divIdentifier).addClass("plate-setup-top-right");
+          $(this.element).append(this.topRight);
+          this._createTabAtRight();
+          this._createTabs();
+          this._placePresetTabs();
+      },
+
+     _createBottom: function() {
+          // Bottom of the screen
+          this._bottomScreen();
+          this.bottomForFirstTime();
+     },
 
       _createElement: function(element) {
         return $(element);
       },
 
       _setShortcuts: function () {
-        var that = this; 
+        var that = this;
         window.addEventListener("cut", function (e) {
           if (document.activeElement == document.body) {
             that.copyCriteria();

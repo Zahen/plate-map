@@ -11,7 +11,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
         this.bottomTable = this._createElement("<table></table>").addClass("plate-setup-bottom-table");
         this.bottomTableContainer.append(this.bottomTable);
         this.bottomContainer.append(this.bottomTableContainer);
-        this.container.append(this.bottomContainer);
+        this.element.append(this.bottomContainer);
       },
 
       addBottomTableHeadings: function() {
