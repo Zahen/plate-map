@@ -284,6 +284,7 @@
 
 .plate-setup-bottom-table-container {
     overflow: auto;
+    height: 300px;
 }
 
 .plate-setup-bottom-table {
