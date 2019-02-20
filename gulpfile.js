@@ -50,9 +50,9 @@ const PATH = {
             root: 'dist/dev'
         },
         pack: {
-            css: 'dist/package/css',
-            js: 'dist/package/js',
-            root: 'dist/package'
+            css: 'dist/plate-map/css',
+            js: 'dist/plate-map/js',
+            root: 'dist/plate-map'
         }
     }
 };
@@ -170,7 +170,7 @@ gulp.task('inject.dev', () => {
 
 gulp.task('server.dev', () => {
     browserSync.init({server: 'dist/dev'});
-    gulp.watch([PATH.source.app.css, PATH.source.app.js], ['build.dev'])
+    gulp.watch([PATH.source.app.css, PATH.source.app.js, PATH.source.app.html], ['build.dev'])
         .on('change', browserSync.reload);
 });
 
