@@ -93,7 +93,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
       _makeRegularField: function (data, tabPointer, fieldArray, checkbox){
         var that = this;
-        var fieldDivId = tabPointer.toString() + '-' + data.name.replace(/ /g, '-');
+        var fieldDivId = 'tab-' + tabPointer.toString() + '-' + data.name.replace(/ /g, '-');
         var wrapperDiv = $('#' + fieldDivId);
         if (!wrapperDiv.length) {
           wrapperDiv = that._createElement("<div></div>").addClass("plate-setup-tab-default-field");
