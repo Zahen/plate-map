@@ -99,6 +99,8 @@ var plateLayOutWidget = plateLayOutWidget || {};
           wrapperDiv = that._createElement("<div></div>").addClass("plate-setup-tab-default-field");
           wrapperDiv.attr('id', fieldDivId);
           that.allDataTabs[tabPointer].append(wrapperDiv);
+        } else {
+          console.info('found ' + fieldDivId);
         }
         var wrapperDivLeftSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-left-side");
         var wrapperDivRightSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-right-side ");

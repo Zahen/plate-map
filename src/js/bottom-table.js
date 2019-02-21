@@ -262,7 +262,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
                 });
 
                 overlayContainer.append(buttonContainer);
-                $(".plate-setup-bottom-container").prepend(overlayContainer);
+                $(".plate-setup-groups-container").prepend(overlayContainer);
             }
         };
     }

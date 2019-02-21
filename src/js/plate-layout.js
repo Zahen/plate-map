@@ -123,9 +123,9 @@ $.widget("DNA.plateLayOut", {
 
         this.imgSrc = this.options.imgSrc || "assets";
 
-        this._createTopLeft();
-    this._createTopRight();
-    this._createBottom();
+        this._createCanvasContainer();
+        this._createTabsContainer();
+        this._createGroupsContainer();
 
         this._trigger("created", null, this);
 

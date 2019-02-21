@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
 
-/* Top Left */
+/* Canvas Container */
 
 .plate-setup-overlay-container {
     background-color: #464646;
@@ -20,7 +20,6 @@
     color: white;
     font-size: 12px;
     line-height: 30px;
-    height: 32px;
     font-family: "Roboto", Arial, sans-serif;
     margin: 2px 8px;
     flex: 1 1 auto;
@@ -61,7 +60,7 @@
     height: 400px;
 }
 
-/* Top Right */
+/* Tabs Container */
 
 .plate-setup-tab-container {
     position: absolute;
@@ -272,7 +271,7 @@
 
 }
 
-/* Bottom */
+/* Groups Container */
 
 .plate-setup-bottom-control-container {
     background-color: #464646;

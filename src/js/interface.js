@@ -6,10 +6,10 @@ var plateLayOutWidget = plateLayOutWidget || {};
         // interface holds all the methods to put the interface in place
         return {
 
-            _createTopLeft: function () {
+            _createCanvasContainer: function () {
                 var divIdentifier = '<div></div>';
-                this.topLeft = this.element.find('#top-left');
-                this.topLeft.addClass("plate-setup-top-left");
+                this.topLeft = this.element.find('#wells-container');
+                this.topLeft.addClass("plate-setup-wells-container");
                 this.overLayContainer = this._createElement(divIdentifier).addClass("plate-setup-overlay-container");
                 this.canvasContainer = this._createElement(divIdentifier).addClass("plate-setup-canvas-container");
                 this._createOverLay();
@@ -27,18 +27,19 @@ var plateLayOutWidget = plateLayOutWidget || {};
                 this._configureUndoRedoArray();
             },
 
-            _createTopRight: function () {
-                this.topRight = this.element.find('#top-right');
-                this.topRight.addClass("plate-setup-top-right");
+            _createTabsContainer: function () {
+                this.topRight = this.element.find('#tabs-container');
+                // NB: the #tabs-container element may not exist in the DOM, but '.addClass()' below will not raise any error !
+                this.topRight.addClass("plate-setup-tabs-container");
                 this._createTabAtRight();
                 this._createTabs();
                 this._placePresetTabs();
             },
 
-            _createBottom: function () {
+            _createGroupsContainer: function () {
                 // Bottom of the screen
-                this.bottomContainer = this.element.find('#bottom');
-                this.bottomContainer.addClass("plate-setup-bottom-container");
+                this.bottomContainer = this.element.find('#groups-container');
+                this.bottomContainer.addClass("plate-setup-groups-container");
                 this._bottomScreen();
                 this.bottomForFirstTime();
             },
