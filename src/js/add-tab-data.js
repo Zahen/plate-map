@@ -65,6 +65,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
           console.log("Field " + data.id + " autoassigned type " + data.type);
         }
         var wrapperDiv = that._createElement("<div></div>").addClass("plate-setup-tab-default-field");
+        wrapperDiv.attr('id', tabPointer.toString() + '-' + data.name.replace(/ /g, '-'));
         var wrapperDivLeftSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-left-side");
         var wrapperDivRightSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-right-side");
         var nameContainer = that._createElement("<div></div>").addClass("plate-setup-tab-name").text(data.name);
@@ -91,53 +92,59 @@ var plateLayOutWidget = plateLayOutWidget || {};
       },
 
       _makeRegularField: function (data, tabPointer, fieldArray, checkbox){
-          var that = this;
-          var wrapperDiv = that._createElement("<div></div>").addClass("plate-setup-tab-default-field");
-          var wrapperDivLeftSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-left-side");
-          var wrapperDivRightSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-right-side ");
-          var nameContainer = that._createElement("<div></div>").addClass("plate-setup-tab-name").text(data.name);
-          var fieldContainer = that._createElement("<div></div>").addClass("plate-setup-tab-field-container");
-
-          wrapperDivRightSide.append(nameContainer);
-          wrapperDivRightSide.append(fieldContainer);
-          wrapperDiv.append(wrapperDivLeftSide);
-          wrapperDiv.append(wrapperDivRightSide);
+        var that = this;
+        var fieldDivId = tabPointer.toString() + '-' + data.name.replace(/ /g, '-');
+        var wrapperDiv = $('#' + fieldDivId);
+        if (!wrapperDiv.length) {
+          wrapperDiv = that._createElement("<div></div>").addClass("plate-setup-tab-default-field");
+          wrapperDiv.attr('id', fieldDivId);
           that.allDataTabs[tabPointer].append(wrapperDiv);
+        }
+        var wrapperDivLeftSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-left-side");
+        var wrapperDivRightSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-right-side ");
+        var nameContainer = that._createElement("<div></div>").addClass("plate-setup-tab-name").text(data.name);
+        var fieldContainer = that._createElement("<div></div>").addClass("plate-setup-tab-field-container");
 
-          var field = {
-            id: data.id,
-            name: data.name,
-            root: wrapperDiv,
-            data: data,
-            required: data.required
-          };
+        wrapperDivRightSide.append(nameContainer);
+        wrapperDivRightSide.append(fieldContainer);
+        wrapperDiv.append(wrapperDivLeftSide);
+        wrapperDiv.append(wrapperDivRightSide);
 
-          if (field.required) {
-            that.requiredField.push(field.id);
-          }
+        var field = {
+          id: data.id,
+          name: data.name,
+          root: wrapperDiv,
+          data: data,
+          required: data.required
+        };
 
-          fieldArray.push(field);
-          that.fieldList.push(field);
-          that.fieldMap[field.id] = field;
+        if (field.required) {
+          that.requiredField.push(field.id);
+        }
 
-          // Adding checkbox
-          if (checkbox) {
-            that._addCheckBox(field);
-          }
-          that._createField(field);
+        fieldArray.push(field);
+        that.fieldList.push(field);
+        that.fieldMap[field.id] = field;
 
-          field.onChange = function () {
-            var v = field.getValue();
-            var data = {};
-            data[field.id] = v;
-            that._addAllData(data);
-          };
-          return field;
+        // Adding checkbox
+        if (checkbox) {
+          that._addCheckBox(field);
+        }
+        that._createField(field);
+
+        field.onChange = function () {
+          var v = field.getValue();
+          var data = {};
+          data[field.id] = v;
+          that._addAllData(data);
+        };
+        return field;
       },
 
       _makeMultiplexField: function (data, tabPointer, fieldArray) {
         var that = this;
         var wrapperDiv = that._createElement("<div></div>").addClass("plate-setup-tab-default-field");
+        wrapperDiv.attr('id', tabPointer.toString() + '-' + data.name.replace(/ /g, '-'));
         var wrapperDivLeftSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-left-side");
         var wrapperDivRightSide = that._createElement("<div></div>").addClass("plate-setup-tab-field-right-side ");
         var nameContainer = that._createElement("<div></div>").addClass("plate-setup-tab-name").text(data.name);
