@@ -234,9 +234,8 @@ $.widget("DNA.plateLayOut", {
         for (var index in derivative) {
             var address = this.indexToAddress(index);
             if (selectedAddress.indexOf(address) >= 0) {
-                color = this.engine.colorMap.get(Number(index));
                 var well = JSON.parse(JSON.stringify(derivative[index]));
-                well.colorIndex = color;
+                well.colorIndex = this.engine.colorMap.get(Number(index));
                 selectedObjects[address] = well;
             }
         }
@@ -255,19 +254,19 @@ $.widget("DNA.plateLayOut", {
         }
         if (selectedObjects[selectedObjectAddress]) {
             var colorIndex = selectedObjects[selectedObjectAddress].colorIndex;
-            var tableContainer = document.querySelector('.plate-setup-bottom-table-container');
-            var allCells = document.querySelectorAll('.plate-setup-bottom-id');
-            for (var i = 0; i < allCells.length; i++) {
-                var cell = allCells[i];
-                var parentCells = cell.parentNode.children;
-                for (var j = 1; j < parentCells.length; j++) {
-                    parentCells[j].style.background = '#ffffff';
-                }
-                if (cell.querySelector('button').innerHTML === colorIndex.toString()) {
-                    for (var j = 1; j < parentCells.length; j++) {
-                        parentCells[j].style.background = '#22cb94';
+            var trs = document.querySelectorAll('table.plate-setup-bottom-table tr');
+            for (var i = 1; i < trs.length; i++) { // start at 1 to skip the table headers
+                var tds = trs[i].children;
+                var isSelected = tds[0].querySelector('button').innerHTML === colorIndex.toString();
+                for (var j = 1; j < tds.length; j++) {
+                    if (isSelected) {
+                        tds[j].style.background = '#22cb94';
+                    } else {
+                        tds[j].style.background = '#ffffff';
                     }
-                    scrollTo(tableContainer, cell.offsetTop, 300);
+                }
+                if (isSelected) {
+                    scrollTo(document.querySelector('.plate-setup-bottom-table-container'), tds[0].offsetTop, 300);
                 }
             }
         }

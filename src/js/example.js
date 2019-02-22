@@ -194,6 +194,7 @@ window.onload = function () {
         numRows: 8,
         numCols: 12,
         attributes: attributes,
+        // scrollToGroup: false, // optional
 
         updateWells: function (event, data) {
             //data has changed
@@ -202,9 +203,6 @@ window.onload = function () {
         },
         created: function (event, data) {
             console.log("Created");
-        },
-        selectedWells: function(event, data) {
-            $("#my-plate-layout").plateLayOut("selectObjectInBottomTab");
         }
     });
     window.plateData = makeNewPlate();
