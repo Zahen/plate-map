@@ -87,6 +87,11 @@ function config_env(env) {
     config.destination.root = PATH.destination[env].root;
 }
 
+function reload(done) {
+    browserSync.reload();
+    done();
+}
+
 gulp.task('config.prod', async () => {
     config_env('prod');
 });
@@ -171,7 +176,7 @@ gulp.task('inject.dev', () => {
 
 gulp.task('server.dev', async () => {
     browserSync.init({server: PATH.destination.dev.root});
-    gulp.watch(PATH.source.app.css.concat(PATH.source.app.js), gulp.series('build.dev', browserSync.reload));
+    gulp.watch(PATH.source.app.css.concat(PATH.source.app.js), gulp.series('build.dev', reload));
 });
 
 gulp.task('server.prod', async () => {
