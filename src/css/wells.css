@@ -1,0 +1,59 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+.plate-setup-overlay-container {
+    background-color: #464646;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    vertical-align: middle;
+}
+
+.plate-setup-overlay-radio-container {
+    width: 32px;
+    height: 32px;
+}
+
+.plate-setup-overlay-text-container {
+    color: white;
+    font-size: 12px;
+    line-height: 30px;
+    font-family: "Roboto", Arial, sans-serif;
+    margin: 2px 8px;
+    flex: 1 1 auto;
+}
+
+.plate-setup-overlay-button-container,
+.plate-setup-overlay-bottom-button-container {
+    flex: 0 0 auto;
+    display: flex;
+}
+
+.plate-setup-button {
+    height: 23px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 12px;
+    border: none;
+    background-color: white;
+    border-radius: 2px;
+    margin-right: 4px;
+    flex: 1 0 0;
+    white-space: nowrap;
+}
+
+.plate-setup-clicked-button {
+    height: 23px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 12px;
+    border: none;
+    background-color: aquamarine;
+    border-radius: 2px;
+    margin-right: 4px;
+    flex: 1 0 0;
+    white-space: nowrap;
+}
+
+.plate-setup-canvas-container {
+    width: auto;
+    height: 500px;
+}

@@ -81,10 +81,30 @@ You need to include the following dependencies:
     ``` 
 
 ## Quick start
-Embed code similar to the below to add the plate layout tool to your project: 
+To make `plate-map` running correctly, you must provide 3 divs in your HTML code. These divs should be provided with a 
+proper id [`well-container`, `tabs-container`, `groups-container`], because `plate-map` use these id(s) to setup its
+elements. 
+
+Using bootstrap logic is mandatory to have a good look for `plate-map`. The column number of each div is the responsibility 
+of the developer integrating `plate-map`, but it is recommended that you embed code similar to the below to nicely add 
+the `plate-map` tool to your project:
+
 ```html
-<div id="my-plate-layout"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div id="my-plate-layout" class="col">
+            <div class="row mt-1">
+                <div id="wells-container" class="col-5"></div>
+                <div id="tabs-container" class="col-3"></div>
+            </div>
+            <div class="row mt-2">
+                <div id="groups-container" class="col-8"></div>
+            </div>
+        </div>
+    </div>
+</div>
 ```
+
 The source file `src/js/example.js` (shown below) initializes the plate layout tool. See Configurations Options
 for all available settings. **Note** that this source file is not included in the npm package, but it is available on 
 the Github repository. 

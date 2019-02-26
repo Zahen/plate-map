@@ -143,6 +143,7 @@ window.onload = function () {
         ]
     };
     window.plateData = {};
+
     function makeNewPlate(obj) {
         var d = $("#my-plate-layout").plateLayOut("getDimensions");
         var rows = d.rows;
@@ -151,7 +152,7 @@ window.onload = function () {
         for (var r = 0; r < rows; r++) {
             var volume = 100;
             var pol = (r < (rows / 2)) ? 234 : 123;
-            var on_ice = Boolean(r % 2);
+            var on_ice = Boolean(r % 4);
             for (var c = 0; c < cols; c++) {
                 var i = r * cols + c;
                 var v = volume;
@@ -180,8 +181,8 @@ window.onload = function () {
                     amplicons: amplicons,
                     on_ice: on_ice
                 };
-                if ((c % 2) > 0) {
-                    volume /= 10
+                if ((c % 2) >= 0) {
+                    volume /= 8
                 }
             }
         }
@@ -190,6 +191,7 @@ window.onload = function () {
             checkboxes: ["volume", "pol"]
         };
     }
+
     $("#my-plate-layout").plateLayOut({
         numRows: 8,
         numCols: 12,

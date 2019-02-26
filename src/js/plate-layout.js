@@ -123,7 +123,7 @@ $.widget("DNA.plateLayOut", {
 
         this.imgSrc = this.options.imgSrc || "assets";
 
-        this._createCanvasContainer();
+        this._createWellsContainer();
         this._createTabsContainer();
         this._createGroupsContainer();
 

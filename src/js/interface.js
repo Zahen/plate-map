@@ -6,16 +6,16 @@ var plateLayOutWidget = plateLayOutWidget || {};
         // interface holds all the methods to put the interface in place
         return {
 
-            _createCanvasContainer: function () {
+            _createWellsContainer: function () {
                 var divIdentifier = '<div></div>';
-                this.topLeft = this.element.find('#wells-container');
-                this.topLeft.addClass("plate-setup-wells-container");
+                this.wellsContainer = this.element.find('#wells-container');
+                this.wellsContainer.addClass("plate-setup-wells-container");
                 this.overLayContainer = this._createElement(divIdentifier).addClass("plate-setup-overlay-container");
                 this.canvasContainer = this._createElement(divIdentifier).addClass("plate-setup-canvas-container");
                 this._createOverLay();
-                $(this.topLeft).append(this.overLayContainer);
+                $(this.wellsContainer).append(this.overLayContainer);
                 this._createCanvas();
-                $(this.topLeft).append(this.canvasContainer);
+                $(this.wellsContainer).append(this.canvasContainer);
                 this._initiateFabricCanvas();
                 // Canvas
                 this._canvas();
@@ -28,16 +28,15 @@ var plateLayOutWidget = plateLayOutWidget || {};
             },
 
             _createTabsContainer: function () {
-                this.topRight = this.element.find('#tabs-container');
+                this.tabsContainer = this.element.find('#tabs-container');
                 // NB: the #tabs-container element may not exist in the DOM, but '.addClass()' below will not raise any error !
-                this.topRight.addClass("plate-setup-tabs-container");
+                this.tabsContainer.addClass("plate-setup-tabs-container");
                 this._createTabAtRight();
                 this._createTabs();
                 this._placePresetTabs();
             },
 
             _createGroupsContainer: function () {
-                // Bottom of the screen
                 this.bottomContainer = this.element.find('#groups-container');
                 this.bottomContainer.addClass("plate-setup-groups-container");
                 this._bottomScreen();

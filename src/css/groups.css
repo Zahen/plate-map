@@ -1,0 +1,73 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+.plate-setup-bottom-control-container {
+    background-color: #464646;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    vertical-align: middle;
+}
+
+.plate-setup-bottom-table-container {
+    overflow: auto;
+    height: 260px;
+}
+
+.plate-setup-bottom-table {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.plate-setup-bottom-table th {
+    border: solid #c2c2c2 1px;
+    background-color: #e1e1e1;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: left;
+}
+
+.plate-setup-bottom-table td {
+    border: solid #c2c2c2 1px;
+    padding: 5px 10px;
+    background-color: white;
+}
+
+.plate-setup-color-text {
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    padding: 3px 15px;
+    background-color: WHITE;
+    margin-right: 4px;
+}
+
+.plate-setup-bottom-id {
+    width: 40px;
+    text-align: center;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3), transparent)
+}
+
+input.invalid {
+    background-color: pink;
+}
+
+.plate-setup-remove-all-button-container {
+    text-align: left;
+}
+
+.plate-setup-remove-all-button {
+    width: 100%;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    text-align: left;
+    white-space: nowrap;
+    border: 1px solid #aaa;
+    border-top: none;
+    color: #444;
+    background-color: #fff;
+    background-image: linear-gradient(to top, #eee 0%, #fff 50%);
+}

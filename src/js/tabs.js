@@ -16,7 +16,7 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
       _createTabAtRight: function() {
         this.tabContainer = this._createElement("<div></div>").addClass("plate-setup-tab-container");
-        $(this.topRight).append(this.tabContainer);
+        $(this.tabsContainer).append(this.tabContainer);
       },
 
       _createTabs: function() {
