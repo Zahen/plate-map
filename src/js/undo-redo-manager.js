@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.undoRedoManager = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.undoRedoManager = function(THIS) {
 
@@ -80,4 +78,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
     }
   };
 
-})(jQuery, fabric);
+};

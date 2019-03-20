@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function ($, fabric) {
+plateMapModules.bottomTable = function ($, fabric, plateLayOutWidget) {
 
     plateLayOutWidget.bottomTable = function () {
         // for bottom table
@@ -266,4 +264,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
             }
         };
     }
-})(jQuery, fabric);
+};

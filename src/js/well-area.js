@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.wellArea = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.wellArea = function(fabric) {
 
@@ -244,4 +242,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     }
   }
-})(jQuery, fabric);
+};

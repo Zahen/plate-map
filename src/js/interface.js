@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function ($, fabric) {
+plateMapModules.interface = function($, fabric, plateLayOutWidget) {
 
     plateLayOutWidget.interface = function () {
         // interface holds all the methods to put the interface in place
@@ -92,4 +90,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
             },
         };
     }
-})(jQuery, fabric);
+};

@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function ($, fabric) {
+plateMapModules.addTabData = function ($, fabric, plateLayOutWidget) {
 
     plateLayOutWidget.addTabData = function () {
 
@@ -253,4 +251,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
         }
     }
 
-})(jQuery, fabric);
+};

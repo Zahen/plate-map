@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.fabricEvents = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.fabricEvents = function() {
     // This object contains Menu items and how it works;
@@ -454,4 +452,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric);
+};

@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.addDataOnChange = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.addDataOnChange = function() {
     // This object is invoked when something in the tab fields change
@@ -192,4 +190,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       }
     };
   }
-})(jQuery, fabric);
+};

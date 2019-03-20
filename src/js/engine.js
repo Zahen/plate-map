@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.engine = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.engine = function(THIS) {
     // Methods which look after data changes and stack up accordingly
@@ -40,7 +38,6 @@ var plateLayOutWidget = plateLayOutWidget || {};
             var wellData = {};
             for (var i = 0; i < THIS.globalSelectedAttributes.length; i++) {
               var attr = THIS.globalSelectedAttributes[i]; 
-
               if (attr in THIS.globalSelectedMultiplexSubfield){
                 var selectedSubFields = THIS.globalSelectedMultiplexSubfield[attr];
                 var newMultiplexVal = [];
@@ -170,4 +167,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       }
     }
   }
-})(jQuery, fabric);
+};

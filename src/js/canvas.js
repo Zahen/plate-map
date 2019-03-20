@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.canvas = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.canvas = function() {
     //
@@ -38,4 +36,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric);
+};

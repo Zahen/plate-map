@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.loadPlate = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.loadPlate = function(THIS) {
     // Methods which look after data changes and stack up accordingly
@@ -90,4 +88,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     }
   }
-})(jQuery, fabric);
+};

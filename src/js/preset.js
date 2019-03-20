@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.preset = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.preset = function(me) {
     // All the preset action goes here
@@ -53,4 +51,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       },
     };
   }
-})(jQuery, fabric);
+};

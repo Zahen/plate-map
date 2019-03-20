@@ -1,5 +1,6 @@
 // Wait for all the script load from the loader.js and fire up
 window.onload = function () {
+    plateMapImportModules();
     var fields = {
         polymerase: {
             required: true,
@@ -192,21 +193,26 @@ window.onload = function () {
         };
     }
 
-    $("#my-plate-layout").plateLayOut({
-        numRows: 8,
-        numCols: 12,
-        attributes: attributes,
-        // scrollToGroup: false, // optional
+    function initPlatelayout() {
+        $("#my-plate-layout").plateLayOut({
+            numRows: 8,
+            numCols: 12,
+            attributes: attributes,
+            // scrollToGroup: false, // optional
 
-        updateWells: function (event, data) {
-            //data has changed
-            window.plateData = data;
-            console.log(Object.keys(data.derivative).length + " wells updated");
-        },
-        created: function (event, data) {
-            console.log("Created");
-        }
-    });
-    window.plateData = makeNewPlate();
-    $("#my-plate-layout").plateLayOut("getPlates", window.plateData);
+            updateWells: function (event, data) {
+                //data has changed
+                window.plateData = data;
+                console.log(Object.keys(data.derivative).length + " wells updated");
+            },
+            created: function (event, data) {
+                console.log("Created");
+            }
+        });
+        window.plateData = makeNewPlate();
+        $("#my-plate-layout").plateLayOut("getPlates", window.plateData);
+    }
+
+    initPlatelayout();
+
 };

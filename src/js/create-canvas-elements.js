@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.createCanvasElements = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.createCanvasElements = function() {
     // this class manages creating all the elements within canvas
@@ -260,4 +258,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       }
     };
   }
-})(jQuery, fabric);
+};

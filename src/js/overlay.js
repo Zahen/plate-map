@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.overlay = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.overlay = function() {
     // overlay holds all the methods to put the part just above the canvas which contains all those
@@ -113,4 +111,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       }
     };
   }
-})(jQuery, fabric);
+};

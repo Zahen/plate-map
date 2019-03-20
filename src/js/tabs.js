@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.tabs = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.tabs = function() {
     // Tabs crete and manage tabs at the right side of the canvas.
@@ -83,4 +81,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       }
     };
   }
-})(jQuery, fabric);
+};

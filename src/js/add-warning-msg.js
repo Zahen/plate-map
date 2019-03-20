@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.addWariningMsg = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.addWarningMsg = function () {
     // For those check boxes associated with every field in the tab
@@ -108,4 +106,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
       }
     }
   }
-})(jQuery, fabric);
+}

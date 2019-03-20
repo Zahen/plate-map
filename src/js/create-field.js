@@ -1,6 +1,4 @@
-var plateLayOutWidget = plateLayOutWidget || {};
-
-(function($, fabric) {
+plateMapModules.createField = function($, fabric, plateLayOutWidget) {
 
   plateLayOutWidget.createField = function() {
     // It create those fields in the tab , there is 4 types of them.
@@ -1294,4 +1292,4 @@ var plateLayOutWidget = plateLayOutWidget || {};
 
     };
   }
-})(jQuery, fabric);
+};
