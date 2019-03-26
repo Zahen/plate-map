@@ -195,10 +195,11 @@ window.onload = function () {
 
     function initPlatelayout() {
         $("#my-plate-layout").plateLayOut({
-            numRows: 8,
-            numCols: 12,
+            numRows: 4,
+            numCols: 6,
             attributes: attributes,
             // scrollToGroup: false, // optional
+            customCanvas: {fontSize: 15},
 
             updateWells: function (event, data) {
                 //data has changed
